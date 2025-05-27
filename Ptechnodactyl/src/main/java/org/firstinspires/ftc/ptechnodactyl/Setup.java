@@ -8,36 +8,25 @@ public class Setup {
     public static class Connected {
 
         public static boolean DRIVEBASE = true;
-        public static boolean TESTSUBSYSTEM = false;
-        public static boolean CLAWSUBSYSTEM = true;
-        public static boolean MOTOR = false;
-        public static boolean SERVO = false;
         public static boolean ARM = true;
-        public static boolean CLAWSERVO = true;
-        public static boolean DISTANCE_SENSOR = false;
-        public static boolean COLOR_SENSOR = false;
-        public static boolean FLYWHEEL = false;
-        public static boolean WEBCAM = false;
-        public static boolean EXTERNAL_IMU = false;
+        public static boolean CLAW = true;
+
     }
 
     @Config
     public static class HardwareNames {
 
-        public static String MOTOR = "motor";
-        public static String FLMOTOR = "fl";
-        public static String FRMOTOR = "fr";
-        public static String RLMOTOR = "rl";
-        public static String RRMOTOR = "rr";
-        public static String FLYWHEELMOTOR = "fly";
-        public static String SERVO = "s";
+
+        public static String PITCHMOTOR = "Arm";
+        public static String SLIDEMOTOR = "Slide";
+        public static String FLMOTOR = "LF";
+        public static String FRMOTOR = "RF";
+        public static String RLMOTOR = "LB";
+        public static String RRMOTOR = "RB";
+        public static String WRISTSERVO = "Wrist";
+        public static String PIVOTSERVO = "Pivot";
         public static String IMU = "imu";
-        public static String EXTERNAL_IMU = "adafruit-imu";
-        public static String DISTANCE = "d";
-        public static String COLOR = "c";
-        public static String CAMERA = "camera";
-        public static String ARM = "arm";
-        public static String CLAWSERVO = "clawServo";
+        public static String CLAWSERVO = "Claw";
     }
 
     @Config

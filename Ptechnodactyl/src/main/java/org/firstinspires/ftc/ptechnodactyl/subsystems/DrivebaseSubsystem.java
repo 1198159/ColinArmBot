@@ -155,7 +155,6 @@ public class DrivebaseSubsystem
         rl2 = rlMotor;
         rr2 = rrMotor;
         curHeading = imu.getHeading();
-        Setup.HardwareNames.COLOR = imu.getClass().toString();
     }
 
     @Override
@@ -168,7 +167,6 @@ public class DrivebaseSubsystem
             " : " +
             (poseVelocity != null ? poseVelocity.toString() : "nullv");
             curHeading = this.gyro.getHeading();
-            Setup.HardwareNames.FLYWHEELMOTOR = this.gyro.getClass().toString();
         }
     }
 

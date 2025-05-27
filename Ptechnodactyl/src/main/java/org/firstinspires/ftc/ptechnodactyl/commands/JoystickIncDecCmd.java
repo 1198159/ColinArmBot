@@ -23,7 +23,6 @@ public class JoystickIncDecCmd implements Command, Loggable {
     @Override
     public void execute() {
         double xvalue = -x.getAsDouble();
-        subsystem.increment(xvalue);
     }
 
     @Override

@@ -26,7 +26,6 @@ public class ArmSubsystem implements Subsystem, Loggable {
         // axon bevels ratio / pulley radius
         public static double SLIDE_RAD_TO_M =  (52.0 / 18) / 0.01;
 
-        public static double WRIST_SERVO_TO_RAD = 1.5 * Math.PI;
         public static double WRIST_UP_POSITION = 1;
         public static double WRIST_DOWN_POSITION = 0.7;
 
@@ -112,7 +111,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public ArmSubsystem(EncodedMotor<DcMotorEx> pitchMotor, EncodedMotor<DcMotorEx> slideMotor, Servo wristServo) {
         this.pitchMotor = pitchMotor.getRawMotor(DcMotorEx.class);
         this.pitchMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        this.slideMotor = slideMotor.getRawMotor(DcMotorEx.class);;
+        this.slideMotor = slideMotor.getRawMotor(DcMotorEx.class);
         this.wristServo = wristServo;
 
 

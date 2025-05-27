@@ -67,7 +67,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
         public static Vector2d PICKUP = new Vector2d(0.75, 0);
 
-        public static Vector2d SCORE = new Vector2d(0, 0.9);
+        public static Vector2d SCORE = new Vector2d(0, 0.95);
 
         public static Vector2d RETRACT = new Vector2d(0.4, 0);
 
@@ -80,9 +80,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     }
 
-    private PIDFController pitchPidController, slidePidController;
+    private final PIDFController pitchPidController, slidePidController;
 
-    private DcMotorEx pitchMotor, slideMotor;
+    private final DcMotorEx pitchMotor, slideMotor;
 
     @Log.Number(name="slide power")
     public double slidePower = 0;
@@ -100,7 +100,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public double slideDistance = 0;
 
 
-    private Servo wristServo;
+    private final Servo wristServo;
     @Log(name = "wristPosition")
     public double wristPosition = 0;
 
@@ -167,12 +167,12 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
    public void setPitchPos(double angle) {
-        pitchPidController.setTargetPosition(Range.clip(angle, 0, Math.PI/2));
+        pitchPidController.setTargetPosition(Range.clip(angle, ArmConstants.PITCH_ARM_MIN, ArmConstants.PITCH_ARM_MAX));
    }
 
    public void setArmPos(Vector2d pos){
         setPitchPos(pos.angle());
-        setSlidePos(pos.norm()-ArmConstants.WRIST_ASM_OFFSET.norm());
+        setSlidePos(Range.clip(pos.norm(), ArmConstants.SLIDE_M_MIN, ArmConstants.SLIDE_M_MAX)-ArmConstants.WRIST_ASM_OFFSET.norm());
    }
 
    public void setSlidePos(double slidePos) {

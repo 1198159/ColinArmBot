@@ -155,7 +155,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
     @Override
     public void periodic() {
-        pitchPower = Range.clip(pitchPidController.update(getArmAngleRad(), getArmAngleVelRadS()), -1, 1);
+        pitchPower = Range.clip(pitchPidController.update(getArmAngleRad(), getArmAngleVelRadS()), -0.2, 1);
         slidePower = Range.clip(slidePidController.update(getSlidePositionM(), getSlideVelMS()), -1, 1);
 
         pitchMotor.setPower(pitchPower);

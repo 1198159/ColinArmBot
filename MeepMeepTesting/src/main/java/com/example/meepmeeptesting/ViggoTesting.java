@@ -19,19 +19,19 @@ public class ViggoTesting {
     public static class AutoConstants {
 
         public static Function<Pose2d, TrajectoryBuilder> func;
-        public static Pose2d TEST1 = new Pose2d(23.3, 60, toRadians(0));
-        public static Pose2d TEST2 = new Pose2d(54, 48, toRadians(45));
-        public static Pose2d TEST3 = new Pose2d(56, 37, toRadians(90));
-        public static Pose2d TEST4 = new Pose2d(56, 50, toRadians(45));
-        public static Pose2d TEST5 = new Pose2d(48, 38, toRadians(90));
-        public static Pose2d TEST6 = new Pose2d(56, 50, toRadians(45));
-        public static Pose2d TEST6a = new Pose2d(58, 26, toRadians(180));
-        public static Pose2d TEST6b = new Pose2d(56, 50, toRadians(45));
-        public static Pose2d TEST7 = new Pose2d(40, 13, toRadians(-180));
-        public static Pose2d TEST8 = new Pose2d(23.6, 11, toRadians(-180));
-        public static Pose2d TEST9 = new Pose2d(1, 38, toRadians(-180));
+        public static Pose2d TEST1 = new Pose2d(35, 66, toRadians(180));
+        public static Pose2d TEST2 = new Pose2d(55, 55, toRadians(225));
+        public static Pose2d TEST3 = new Pose2d(48, 38, toRadians(270));
+        public static Pose2d TEST4 = new Pose2d(55, 55, toRadians(225));
+        public static Pose2d TEST5 = new Pose2d(58, 38, toRadians(270));
+        public static Pose2d TEST6 = new Pose2d(55, 55, toRadians(225));
+        public static Pose2d TEST6a = new Pose2d(58, 26, toRadians(0));
+        public static Pose2d TEST6b = new Pose2d(55, 55, toRadians(225));
+        public static Pose2d TEST7 = new Pose2d(40, 13, toRadians(0));
+        public static Pose2d TEST8 = new Pose2d(23.6, 11, toRadians(0));
+        public static Pose2d TEST9 = new Pose2d(1, 38, toRadians(0));
         public static final Supplier<Trajectory> TEST1_TO_TEST2 = () ->
-            func.apply(TEST1).splineToSplineHeading(TEST2, Math.PI - TEST2.getHeading()).build();
+            func.apply(TEST1).lineToLinearHeading(TEST2).build();
         public static final Supplier<Trajectory> TEST2_TO_TEST2 = () ->
             func.apply(TEST2).lineToLinearHeading(TEST3).build();
         public static final Supplier<Trajectory> TEST2_TO_TESTB = () ->
@@ -42,7 +42,7 @@ public class ViggoTesting {
         public static final Supplier<Trajectory> TESTC_TO_TESTD = () ->
             func.apply(TEST5).lineToLinearHeading(TEST6).build();
         public static final Supplier<Trajectory> TESTD_TO_TESTE = () ->
-            func.apply(TEST6).splineToSplineHeading(TEST6a, Math.PI - TEST6a.getHeading()).build();
+            func.apply(TEST6).lineToLinearHeading(TEST6a).build();
         public static final Supplier<Trajectory> TEST2_TO_TEST3 = () ->
             func.apply(TEST6a).lineToLinearHeading(TEST6b).build();
         public static final Supplier<Trajectory> TEST3_TO_TEST4 = () ->
@@ -79,7 +79,7 @@ public class ViggoTesting {
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-            .setDimensions(17.5, 16.5)
+            .setDimensions(11.7, 12.3)
             .followTrajectorySequence(drive -> getTestTrajectory(drive));
         meepMeep.setBackgroundAlpha(0.75f).addEntity(myBot).start();
     }

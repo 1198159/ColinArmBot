@@ -40,8 +40,6 @@ task makeMeepMeep16750Java {
     def fileList = [
         '../Sixteen750/src/main/java/org/firstinspires/ftc/sixteen750/subsystems/DrivebaseSubsystem.java',
         '../Sixteen750/src/main/java/org/firstinspires/ftc/sixteen750/AutoConstants.java',
-        '../Ptechnodactyl/src/main/java/org/firstinspires/ftc/ptechnodactyl/subsystems/DrivebaseSubsystem.java',
-            '../Ptechnodactyl/src/main/java/org/firstinspires/ftc/ptechnodactyl/AutoConstants.java'
     ]
 
     def theFiles = files(fileList)

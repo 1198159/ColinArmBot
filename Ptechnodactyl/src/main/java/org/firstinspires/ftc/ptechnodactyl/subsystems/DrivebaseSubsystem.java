@@ -35,7 +35,7 @@ public class DrivebaseSubsystem
         public static final double TICKS_PER_REV = 537.7; // From GoBilda's website
 
         @MaxRPM
-        public static final double MAX_RPM = 312;
+        public static final double MAX_RPM = 470.5;
 
         public static double MAX_TICKS_PER_SEC = (TICKS_PER_REV * MAX_RPM) / 60.0;
 
@@ -163,9 +163,10 @@ public class DrivebaseSubsystem
             updatePoseEstimate();
             Pose2d pose = getPoseEstimate();
             Pose2d poseVelocity = getPoseVelocity();
-            poseDisplay = pose.toString() +
-            " : " +
-            (poseVelocity != null ? poseVelocity.toString() : "nullv");
+            poseDisplay =
+                pose.toString() +
+                " : " +
+                (poseVelocity != null ? poseVelocity.toString() : "nullv");
             curHeading = this.gyro.getHeading();
         }
     }

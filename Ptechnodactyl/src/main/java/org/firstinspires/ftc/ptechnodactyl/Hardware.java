@@ -9,9 +9,7 @@ import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
-
 import java.util.List;
-
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
 
 public class Hardware implements Loggable {
@@ -29,9 +27,9 @@ public class Hardware implements Loggable {
         hubs = hwmap.getAll(LynxModule.class);
 
         imu = new IMU(
-                Setup.HardwareNames.IMU,
-                RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
+            Setup.HardwareNames.IMU,
+            RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+            RevHubOrientationOnRobot.UsbFacingDirection.UP
         );
 
         if (Setup.Connected.DRIVEBASE) {
@@ -39,7 +37,6 @@ public class Hardware implements Loggable {
             this.flMotor = new EncodedMotor<>(Setup.HardwareNames.FLMOTOR);
             this.rrMotor = new EncodedMotor<>(Setup.HardwareNames.RRMOTOR);
             this.rlMotor = new EncodedMotor<>(Setup.HardwareNames.RLMOTOR);
-
         }
 
         if (Setup.Connected.CLAW) {

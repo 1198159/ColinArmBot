@@ -12,6 +12,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.path.subsystem.MecanumConstants;
 import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import java.util.function.Supplier;
+import org.firstinspires.ftc.ptechnodactyl.AutoConstants;
 import org.firstinspires.ftc.ptechnodactyl.Setup;
 import org.firstinspires.ftc.ptechnodactyl.helpers.HeadingHelper;
 
@@ -35,7 +36,7 @@ public class DrivebaseSubsystem
         public static final double TICKS_PER_REV = 537.7; // From GoBilda's website
 
         @MaxRPM
-        public static final double MAX_RPM = 312;
+        public static final double MAX_RPM = 470.5;
 
         public static double MAX_TICKS_PER_SEC = (TICKS_PER_REV * MAX_RPM) / 60.0;
 
@@ -150,6 +151,7 @@ public class DrivebaseSubsystem
         IGyro imu
     ) {
         super(flMotor, frMotor, rlMotor, rrMotor, imu, () -> DriveConstants.class);
+        AutoConstants.func = this::trajectorySequenceBuilder;
         fl2 = flMotor;
         fr2 = frMotor;
         rl2 = rlMotor;
@@ -163,9 +165,10 @@ public class DrivebaseSubsystem
             updatePoseEstimate();
             Pose2d pose = getPoseEstimate();
             Pose2d poseVelocity = getPoseVelocity();
-            poseDisplay = pose.toString() +
-            " : " +
-            (poseVelocity != null ? poseVelocity.toString() : "nullv");
+            poseDisplay =
+                pose.toString() +
+                " : " +
+                (poseVelocity != null ? poseVelocity.toString() : "nullv");
             curHeading = this.gyro.getHeading();
         }
     }

@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.ptechnodactyl.controllers;
 
 import com.technototes.library.command.CommandScheduler;
+import com.technototes.library.command.ParallelCommandGroup;
+import com.technototes.library.command.WaitCommand;
 import com.technototes.library.control.CommandAxis;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
@@ -12,8 +14,6 @@ import org.firstinspires.ftc.ptechnodactyl.commands.ClawCmds;
 import org.firstinspires.ftc.ptechnodactyl.commands.DrivingCommands;
 import org.firstinspires.ftc.ptechnodactyl.commands.JoystickDriveCommand;
 import org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem;
-import com.technototes.library.command.WaitCommand;
-import com.technototes.library.command.ParallelCommandGroup;
 
 public class DriverController {
 
@@ -26,8 +26,10 @@ public class DriverController {
     public CommandButton pivot90;
     public CommandButton pivotNeutral;
     public CommandButton alignClaw;
-
-
+    public CommandButton score;
+    public CommandButton retract;
+    public CommandButton pickup;
+    public CommandButton spec;
     public Stick driveLeftStick, driveRightStick;
     public CommandButton resetGyroButton, turboButton, snailButton;
     public CommandButton override;
@@ -44,17 +46,27 @@ public class DriverController {
             bindDriveControls();
             bindClawSubsystemControls();
         }
-        if(Setup.Connected.ARM) {
-
-            gamepad.ps_triangle.whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.SCORE)).whenPressed(robot.armSubsystem::wristUp).whenPressed(robot.clawSubsystem::pivotneutral);
-            gamepad.ps_cross.whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.RETRACT)).whenPressed(robot.armSubsystem::wristUp).whenPressed(robot.clawSubsystem::pivotneutral);
-            gamepad.ps_circle.whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.PICKUP)).whenPressed(robot.armSubsystem::wristUp).whenPressed(robot.clawSubsystem::pivotneutral);
-            gamepad.ps_square.whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.SPEC)).whenPressed(robot.armSubsystem::wristUp).whenPressed(robot.clawSubsystem::pivotneutral);
-            if(Setup.Connected.CLAW) {
+        if (Setup.Connected.ARM) {
+            gamepad.ps_triangle
+                .whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.SCORE))
+                .whenPressed(robot.armSubsystem::wristUp)
+                .whenPressed(robot.clawSubsystem::pivotneutral);
+            gamepad.ps_cross
+                .whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.RETRACT))
+                .whenPressed(robot.armSubsystem::wristUp)
+                .whenPressed(robot.clawSubsystem::pivotneutral);
+            gamepad.ps_circle
+                .whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.PICKUP))
+                .whenPressed(robot.armSubsystem::wristUp)
+                .whenPressed(robot.clawSubsystem::pivotneutral);
+            gamepad.ps_square
+                .whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.SPEC))
+                .whenPressed(robot.armSubsystem::wristUp)
+                .whenPressed(robot.clawSubsystem::pivotneutral);
+            if (Setup.Connected.CLAW) {
                 pivotNeutral.whenPressed(robot.armSubsystem::wristDown);
             }
         }
-
     }
 
     private void AssignNamedControllerButton() {
@@ -70,6 +82,10 @@ public class DriverController {
         pivot90 = gamepad.dpadUp;
         pivotNeutral = gamepad.dpadDown;
         alignClaw = gamepad.ps_share;
+        score = gamepad.ps_triangle;
+        retract = gamepad.ps_cross;
+        pickup = gamepad.ps_circle;
+        spec = gamepad.ps_square;
     }
 
     public void bindDriveControls() {
@@ -83,9 +99,9 @@ public class DriverController {
             )
         );
 
-
         resetGyroButton.whenPressed(DrivingCommands.ResetGyro(robot.drivebaseSubsystem));
     }
+
     public void bindClawSubsystemControls() {
         openClaw.whenPressed(ClawCmds.cmds.OpenClaw(robot.clawSubsystem));
         closeClaw.whenPressed(ClawCmds.cmds.CloseClaw(robot.clawSubsystem));

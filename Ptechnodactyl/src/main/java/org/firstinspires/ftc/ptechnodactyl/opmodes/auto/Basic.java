@@ -41,7 +41,7 @@ public class Basic extends CommandOpMode implements Loggable {
                 new TrajectorySequenceCommand(robot.drivebaseSubsystem, b ->
                     b
                         .apply(new ConfigurablePoseD(0, 0, 0).toPose())
-                        .lineTo(new Vector2d(5, 5))
+                        .lineTo(new Vector2d(24, 24))
                         .build()
                 ),
                 // new TurboCommand(robot.drivebaseSubsystem),
@@ -49,7 +49,7 @@ public class Basic extends CommandOpMode implements Loggable {
                 new WaitCommand(AUTO_TIME),
                 new TrajectorySequenceCommand(robot.drivebaseSubsystem, b ->
                     b
-                        .apply(new ConfigurablePoseD(5, 5, 0).toPose())
+                        .apply(new ConfigurablePoseD(24, 24, 0).toPose())
                         .lineTo(new Vector2d(0, 0))
                         .build()
                 ),

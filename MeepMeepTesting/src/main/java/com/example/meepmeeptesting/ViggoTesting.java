@@ -20,6 +20,7 @@ public class ViggoTesting {
 
         public static Function<Pose2d, TrajectoryBuilder> func;
         public static Pose2d START = new Pose2d(35, 66, toRadians(180));
+        public static Pose2d OBSERVATION_ZONE = new Pose2d(-48.2, 64.1, toRadians(180));
         public static Pose2d SCORE = new Pose2d(55, 55, toRadians(225));
         public static Pose2d INTAKE1 = new Pose2d(48, 38, toRadians(270));
         public static Pose2d INTAKE2 = new Pose2d(58, 38, toRadians(270));
@@ -33,6 +34,8 @@ public class ViggoTesting {
             func.apply(SCORE).lineToLinearHeading(INTAKE1).build();
         public static final Supplier<Trajectory> INTAKE1_TO_SCORE = () ->
             func.apply(INTAKE1).lineToLinearHeading(SCORE).build();
+        public static final Supplier<Trajectory> START_TO_OBS = () ->
+                func.apply(START).lineToLinearHeading(OBSERVATION_ZONE).build();
 
         public static final Supplier<Trajectory> SCORE_TO_INTAKE2 = () ->
             func.apply(SCORE).lineToLinearHeading(INTAKE2).build();
@@ -84,15 +87,7 @@ public class ViggoTesting {
     private static TrajectorySequence getTestTrajectory(DriveShim drive) {
         return drive
             .trajectorySequenceBuilder(AutoConstants.START)
-            .addTrajectory(AutoConstants.START_TO_SCORE_.get())
-            .addTrajectory(AutoConstants.SCORE_TO_INTAKE1.get())
-            .addTrajectory(AutoConstants.INTAKE1_TO_SCORE.get())
-            .addTrajectory(AutoConstants.SCORE_TO_INTAKE2.get())
-            .addTrajectory(AutoConstants.INTAKE2_TO_SCORE.get())
-            .addTrajectory(AutoConstants.SCORE_TO_INTAKE3.get())
-            .addTrajectory(AutoConstants.INTAKE3_TO_SCORE.get())
-            .addTrajectory(AutoConstants.SCORE_TO_TRAVEL.get())
-            .addTrajectory(AutoConstants.TRAVEL_TO_ASCENTL1.get())
+            .addTrajectory(AutoConstants.START_TO_OBS.get())
             .build();
     }
 }

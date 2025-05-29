@@ -12,6 +12,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.path.subsystem.MecanumConstants;
 import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import java.util.function.Supplier;
+import org.firstinspires.ftc.ptechnodactyl.AutoConstants;
 import org.firstinspires.ftc.ptechnodactyl.Setup;
 import org.firstinspires.ftc.ptechnodactyl.helpers.HeadingHelper;
 
@@ -150,6 +151,7 @@ public class DrivebaseSubsystem
         IGyro imu
     ) {
         super(flMotor, frMotor, rlMotor, rrMotor, imu, () -> DriveConstants.class);
+        AutoConstants.func = this::trajectorySequenceBuilder;
         fl2 = flMotor;
         fr2 = frMotor;
         rl2 = rlMotor;

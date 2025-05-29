@@ -3,13 +3,19 @@ package org.firstinspires.ftc.ptechnodactyl;
 import static java.lang.Math.toRadians;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+
 import com.technototes.path.geometry.ConfigurablePoseD;
+
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
+
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 
 import java.util.function.Function;
 
 public class AutoConstants {
+
 
     public static ConfigurablePoseD START = new ConfigurablePoseD(35, 66, toRadians(180));
     public static ConfigurablePoseD SCORE = new ConfigurablePoseD(55, 55, toRadians(225));
@@ -64,5 +70,6 @@ public class AutoConstants {
                     .apply(TRAVEL.toPose())
                     .lineToLinearHeading(ASCENTL1.toPose())
                     .build();
+
 
 }

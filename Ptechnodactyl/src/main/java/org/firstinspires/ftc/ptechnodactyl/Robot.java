@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.ptechnodactyl;
 
 import com.technototes.library.logger.Loggable;
-
+import org.firstinspires.ftc.ptechnodactyl.commands.ArmCommand;
+import org.firstinspires.ftc.ptechnodactyl.commands.ClawCmds;
 import org.firstinspires.ftc.ptechnodactyl.helpers.StartingPosition;
 import org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.ptechnodactyl.subsystems.ClawSubsystem;
@@ -32,7 +33,5 @@ public class Robot implements Loggable {
         if (Setup.Connected.ARM) {
             this.armSubsystem = new ArmSubsystem(hw.pitchMotor, hw.slideMotor, hw.wristServo);
         }
-
-
     }
 }

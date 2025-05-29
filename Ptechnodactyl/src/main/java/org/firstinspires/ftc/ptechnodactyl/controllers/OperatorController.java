@@ -69,6 +69,10 @@ public class OperatorController {
         pivot90 = gamepad.dpadUp;
         pivotNeutral = gamepad.dpadDown;
         alignClaw = gamepad.ps_share;
+        score = gamepad.ps_triangle;
+        spec = gamepad.ps_square;
+        retract = gamepad.ps_cross;
+        pickup = gamepad.ps_circle;
     }
 
     public void BindControls() {
@@ -85,6 +89,10 @@ public class OperatorController {
         pivotNeutral.whenPressed(ClawCmds.cmds.PivotNeutral(robot.clawSubsystem));
         pivot90.whenPressed(ClawCmds.cmds.Pivot90(robot.clawSubsystem));
         alignClaw.whenPressed(ClawCmds.cmds.GravityAlign(robot.clawSubsystem));
+        score.whenPressed(ArmCommand.score(robot.armSubsystem));
+        spec.whenPressed(ArmCommand.spec(robot.armSubsystem));
+        retract.whenPressed(ArmCommand.retract(robot.armSubsystem));
+        pickup.whenPressed(ArmCommand.pickup(robot.armSubsystem));
         CommandScheduler.scheduleJoystick(new JoystickIncDecCmd(robot.clawSubsystem, armStick));
     }
 }

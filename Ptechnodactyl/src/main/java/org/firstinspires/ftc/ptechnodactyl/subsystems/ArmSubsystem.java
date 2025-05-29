@@ -39,7 +39,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
         public static double WRIST_ASM_KG = 0.55;
 
-        public static Vector2d WRIST_ASM_OFFSET = new Vector2d(0.4, 0);
+        public static Vector2d WRIST_ASM_OFFSET = new Vector2d(0.5, 0);
 
         public static double FORCE_GRAVITY = 9.81;
 
@@ -66,11 +66,11 @@ public class ArmSubsystem implements Subsystem, Loggable {
         public static double R = 2.4; //determined from spec sheet;
         public static double KV = 0; //determined from spec sheet
 
-        public static Vector2d SPEC = new Vector2d(0.6, 0.6);
+        public static Vector2d SPEC = new Vector2d(0.6, 0.4);
 
         public static Vector2d PICKUP = new Vector2d(0.75, 0);
 
-        public static Vector2d SCORE = new Vector2d(0, 0.98);
+        public static Vector2d SCORE = new Vector2d(0, 1.20);
 
         public static Vector2d RETRACT = new Vector2d(0.4, 0);
 
@@ -240,7 +240,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public boolean isAtTargetPosition() {
         return (
             Math.abs(pitchPidController.getLastError()) < 0.3 &&
-            Math.abs(slidePidController.getLastError()) < 0.05
+            Math.abs(slidePidController.getLastError()) < 0.02
         );
     }
 

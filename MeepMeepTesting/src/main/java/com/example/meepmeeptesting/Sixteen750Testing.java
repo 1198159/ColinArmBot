@@ -34,12 +34,12 @@ public class Sixteen750Testing {
         // trackWidth: The width of our wheelbase (not clear what this really affects...) @TrackWidth
         MinVelocityConstraint min_vel = new MinVelocityConstraint(
             Arrays.asList(
-                new AngularVelocityConstraint(60/* @MaxAngleVelo */),
-                new MecanumVelocityConstraint(60/* @MaxVelo */, 14/* @TrackWidth */)
+                new AngularVelocityConstraint(100/* @MaxAngleVelo */),
+                new MecanumVelocityConstraint(100/* @MaxVelo */, 14/* @TrackWidth */)
             )
         );
         ProfileAccelerationConstraint prof_accel = new ProfileAccelerationConstraint(
-            30
+            100
             /* @MaxAccel */
         );
         AutoConstants.fwdFunc = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);

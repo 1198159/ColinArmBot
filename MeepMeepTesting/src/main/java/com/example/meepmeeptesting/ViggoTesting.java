@@ -19,36 +19,33 @@ public class ViggoTesting {
     public static class AutoConstants {
 
         public static Function<Pose2d, TrajectoryBuilder> func;
-        public static Pose2d TEST1 = new Pose2d(35, 66, toRadians(180));
-        public static Pose2d TEST2 = new Pose2d(55, 55, toRadians(225));
-        public static Pose2d TEST3 = new Pose2d(48, 38, toRadians(270));
-        public static Pose2d TEST4 = new Pose2d(55, 55, toRadians(225));
-        public static Pose2d TEST5 = new Pose2d(58, 38, toRadians(270));
-        public static Pose2d TEST6 = new Pose2d(55, 55, toRadians(225));
-        public static Pose2d TEST6a = new Pose2d(58, 26, toRadians(0));
-        public static Pose2d TEST6b = new Pose2d(55, 55, toRadians(225));
-        public static Pose2d TEST7 = new Pose2d(40, 13, toRadians(0));
-        public static Pose2d TEST8 = new Pose2d(23.6, 11, toRadians(0));
+        public static Pose2d START = new Pose2d(35, 66, toRadians(180));
+        public static Pose2d SCORE = new Pose2d(55, 55, toRadians(225));
+        public static Pose2d INTAKE1 = new Pose2d(48, 38, toRadians(270));
+        public static Pose2d INTAKE2 = new Pose2d(58, 38, toRadians(270));
+        public static Pose2d INTAKE3 = new Pose2d(58, 26, toRadians(0));
+        public static Pose2d TRAVEL = new Pose2d(40, 13, toRadians(0));
+        public static Pose2d ASCENTL1 = new Pose2d(23.6, 11, toRadians(0));
         public static Pose2d TEST9 = new Pose2d(1, 38, toRadians(0));
-        public static final Supplier<Trajectory> TEST1_TO_TEST2 = () ->
-            func.apply(TEST1).lineToLinearHeading(TEST2).build();
-        public static final Supplier<Trajectory> TEST2_TO_TEST2 = () ->
-            func.apply(TEST2).lineToLinearHeading(TEST3).build();
-        public static final Supplier<Trajectory> TEST2_TO_TESTB = () ->
-            func.apply(TEST3).lineToLinearHeading(TEST4).build();
+        public static final Supplier<Trajectory> START_TO_SCORE_ = () ->
+            func.apply(START).lineToLinearHeading(SCORE).build();
+        public static final Supplier<Trajectory> SCORE_TO_INTAKE1 = () ->
+            func.apply(SCORE).lineToLinearHeading(INTAKE1).build();
+        public static final Supplier<Trajectory> INTAKE1_TO_SCORE = () ->
+            func.apply(INTAKE1).lineToLinearHeading(SCORE).build();
 
-        public static final Supplier<Trajectory> TESTB_TO_TESTC = () ->
-            func.apply(TEST4).lineToLinearHeading(TEST5).build();
-        public static final Supplier<Trajectory> TESTC_TO_TESTD = () ->
-            func.apply(TEST5).lineToLinearHeading(TEST6).build();
-        public static final Supplier<Trajectory> TESTD_TO_TESTE = () ->
-            func.apply(TEST6).lineToLinearHeading(TEST6a).build();
-        public static final Supplier<Trajectory> TEST2_TO_TEST3 = () ->
-            func.apply(TEST6a).lineToLinearHeading(TEST6b).build();
-        public static final Supplier<Trajectory> TEST3_TO_TEST4 = () ->
-            func.apply(TEST6b).lineToLinearHeading(TEST7).build();
-        public static final Supplier<Trajectory> TEST4_TO_TEST5 = () ->
-            func.apply(TEST7).lineToLinearHeading(TEST8).build();
+        public static final Supplier<Trajectory> SCORE_TO_INTAKE2 = () ->
+            func.apply(SCORE).lineToLinearHeading(INTAKE2).build();
+        public static final Supplier<Trajectory> INTAKE2_TO_SCORE = () ->
+            func.apply(INTAKE2).lineToLinearHeading(SCORE).build();
+        public static final Supplier<Trajectory> SCORE_TO_INTAKE3 = () ->
+            func.apply(SCORE).lineToLinearHeading(INTAKE3).build();
+        public static final Supplier<Trajectory> INTAKE3_TO_SCORE = () ->
+            func.apply(INTAKE3).lineToLinearHeading(SCORE).build();
+        public static final Supplier<Trajectory> SCORE_TO_TRAVEL = () ->
+            func.apply(SCORE).lineToLinearHeading(TRAVEL).build();
+        public static final Supplier<Trajectory> TRAVEL_TO_ASCENTL1 = () ->
+            func.apply(TRAVEL).lineToLinearHeading(ASCENTL1).build();
     }
 
     public static void main(String[] args) {
@@ -70,11 +67,11 @@ public class ViggoTesting {
         MinVelocityConstraint min_vel = new MinVelocityConstraint(
             Arrays.asList(
                 new AngularVelocityConstraint(60/* @MaxAngleVelo */),
-                new MecanumVelocityConstraint(60/* @MaxVelo */, 14.75/* @TrackWidth */)
+                new MecanumVelocityConstraint(75/* @MaxVelo */, 14.75/* @TrackWidth */)
             )
         );
         ProfileAccelerationConstraint prof_accel = new ProfileAccelerationConstraint(
-            30/* @MaxAccel */
+            75/* @MaxAccel */
         );
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
 
@@ -86,16 +83,16 @@ public class ViggoTesting {
 
     private static TrajectorySequence getTestTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.TEST1)
-            .addTrajectory(AutoConstants.TEST1_TO_TEST2.get())
-            .addTrajectory(AutoConstants.TEST2_TO_TEST2.get())
-            .addTrajectory(AutoConstants.TEST2_TO_TESTB.get())
-            .addTrajectory(AutoConstants.TESTB_TO_TESTC.get())
-            .addTrajectory(AutoConstants.TESTC_TO_TESTD.get())
-            .addTrajectory(AutoConstants.TESTD_TO_TESTE.get())
-            .addTrajectory(AutoConstants.TEST2_TO_TEST3.get())
-            .addTrajectory(AutoConstants.TEST3_TO_TEST4.get())
-            .addTrajectory(AutoConstants.TEST4_TO_TEST5.get())
+            .trajectorySequenceBuilder(AutoConstants.START)
+            .addTrajectory(AutoConstants.START_TO_SCORE_.get())
+            .addTrajectory(AutoConstants.SCORE_TO_INTAKE1.get())
+            .addTrajectory(AutoConstants.INTAKE1_TO_SCORE.get())
+            .addTrajectory(AutoConstants.SCORE_TO_INTAKE2.get())
+            .addTrajectory(AutoConstants.INTAKE2_TO_SCORE.get())
+            .addTrajectory(AutoConstants.SCORE_TO_INTAKE3.get())
+            .addTrajectory(AutoConstants.INTAKE3_TO_SCORE.get())
+            .addTrajectory(AutoConstants.SCORE_TO_TRAVEL.get())
+            .addTrajectory(AutoConstants.TRAVEL_TO_ASCENTL1.get())
             .build();
     }
 }

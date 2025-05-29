@@ -42,6 +42,6 @@ public class ArmCommand implements Command {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return subsystem.isAtTargetPosition();
     }
 }

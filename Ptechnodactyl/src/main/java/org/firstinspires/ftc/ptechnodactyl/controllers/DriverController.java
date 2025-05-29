@@ -48,7 +48,7 @@ public class DriverController {
         }
         if (Setup.Connected.ARM) {
             gamepad.ps_triangle
-                .whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.SCORE))
+                .whenPressed(ArmCommand.score(robot.armSubsystem))
                 .whenPressed(robot.armSubsystem::wristUp)
                 .whenPressed(robot.clawSubsystem::pivotneutral);
             gamepad.ps_cross

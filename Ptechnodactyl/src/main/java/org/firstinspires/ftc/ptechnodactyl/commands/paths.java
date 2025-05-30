@@ -123,4 +123,78 @@ public class paths {
                     )
             );
     }
+
+    public static Command SpecimenScoring(Robot r){
+        return new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.START_TO_SCORE1)
+                .alongWith(
+                        ArmCommand.spec(r.armSubsystem),
+                        r.armSubsystem::wristUp,
+                        r.clawSubsystem::pivotneutral,
+                        r.clawSubsystem::closeClaw
+                )
+                .andThen(new WaitCommand(0.1))
+                .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
+                .andThen(new WaitCommand(0.15))
+                .andThen(ArmCommand.retract(r.armSubsystem))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SCORE1_TO_SQUEEZE))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SQUEEZE_TO_SQUEEZEDOWN2))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SQUEEZEDOWN2_TO_SQUEEZEDOWN3))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SQUEEZEDOWN3_TO_OBSZONE1))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.OBSZONE1_TO_BACKUP))
+                .andThen(new WaitCommand(4))
+                // NEED SPEC INTAKE HERE
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.BACKUP_TO_BACKIN))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.BACKIN_TO_SCORE2))
+                .alongWith(
+                        ArmCommand.spec(r.armSubsystem),
+                        r.armSubsystem::wristUp,
+                        r.clawSubsystem::pivotneutral,
+                        r.clawSubsystem::closeClaw
+                )
+                .andThen(new WaitCommand(0.1))
+                .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
+                .andThen(new WaitCommand(0.15))
+                .andThen(ArmCommand.retract(r.armSubsystem))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SCORE2_TO_SQUEEZE))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SQUEEZE_TO_SQUEEZEDOWN32))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SQUEEZEDOWN32_TO_OBSZONE2))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.OBSZONE2_TO_BACKUP2))
+                .andThen(new WaitCommand(4))
+                // NEED SPEC INTAKE HERE
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.BACKUP2_TO_BACKIN2))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.BACKIN2_TO_SCORE3))
+                .alongWith(
+                        ArmCommand.spec(r.armSubsystem),
+                        r.armSubsystem::wristUp,
+                        r.clawSubsystem::pivotneutral,
+                        r.clawSubsystem::closeClaw
+                )
+                .andThen(new WaitCommand(0.1))
+                .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
+                .andThen(new WaitCommand(0.15))
+                .andThen(ArmCommand.retract(r.armSubsystem))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SCORE3_TO_SQUEEZE))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SQUEEZE_TO_SQUEEZEDOWN33))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SQUEEZEDOWN33_TO_OBSZONE3))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.OBSZONE3_TO_BACKUP3))
+                .andThen(new WaitCommand(4))
+                // NEED SPEC INTAKE HERE
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.BACKUP3_TO_BACKIN3))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.BACKIN3_TO_SCORE4))
+                .alongWith(
+                        ArmCommand.spec(r.armSubsystem),
+                        r.armSubsystem::wristUp,
+                        r.clawSubsystem::pivotneutral,
+                        r.clawSubsystem::closeClaw
+                )
+                .andThen(new WaitCommand(0.1))
+                .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
+                .andThen(new WaitCommand(0.15))
+                .andThen(ArmCommand.retract(r.armSubsystem))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SCORE4_TO_OBSPARK));
+
+
+
+
+    }
 }

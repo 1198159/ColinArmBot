@@ -30,13 +30,13 @@ public class ViggoTesting {
         public static Pose2d INTAKE3 = new Pose2d(-58, 26, toRadians(180));
         public static Pose2d TRAVEL = new Pose2d(-40, 13, toRadians(0));
         public static Pose2d ASCENTL1 = new Pose2d(-23.6, 11, toRadians(0));
-        public static Pose2d SQUEEZE = new Pose2d(-35.4, 43, toRadians(0));
+        public static Pose2d SQUEEZE = new Pose2d(-35.4, 35, toRadians(0));
         public static Pose2d SQUEEZEDOWN = new Pose2d(-29.2, 43, toRadians(0));
         public static Pose2d SQUEEZEDOWN2 = new Pose2d(-36.7, 12.3, toRadians(0));
         public static Pose2d SQUEEZEDOWN3 = new Pose2d(-47.2, 12.3, toRadians(0));
-        public static Pose2d SQUEEZEDOWN32 = new Pose2d(-54.2, 12.3, toRadians(0));
+        public static Pose2d SQUEEZEDOWN32 = new Pose2d(-57.2, 12.3, toRadians(0));
         public static Pose2d SQUEEZEDOWN33 = new Pose2d(-64.1, 12.3, toRadians(0));
-        public static Pose2d OBSPARK = new Pose2d(-54.3, 63, toRadians(0));
+        public static Pose2d OBSPARK = new Pose2d(-54.3, 65, toRadians(0));
         public static Pose2d OBSZONE1 = new Pose2d(-47.9, 59.5, toRadians(0));
         public static Pose2d OBSZONE2 = new Pose2d(-57.9, 59.5, toRadians(0));
         public static Pose2d OBSZONE3 = new Pose2d(-64.1, 59.5, toRadians(0));
@@ -61,7 +61,7 @@ public class ViggoTesting {
                 func.apply(BACKIN).lineToLinearHeading(SCORE2).build();
         public static final Supplier<Trajectory> BACKIN2_TO_SCORE3 = () ->
                 func.apply(BACKIN2).lineToLinearHeading(SCORE3).build();
-        public static final Supplier<Trajectory> BQCKIN3_TO_SCORE4 = () ->
+        public static final Supplier<Trajectory> BACKIN3_TO_SCORE4 = () ->
                 func.apply(BACKIN3).lineToLinearHeading(SCORE4).build();
         public static final Supplier<Trajectory> TRANSFER_TO_INTAKE1 = () ->
                 func.apply(TRANSFER).lineToLinearHeading(INTAKE1).build();
@@ -76,12 +76,12 @@ public class ViggoTesting {
         public static final Supplier<Trajectory> INTAKE3_TO_TRANSFER = () ->
                 func.apply(INTAKE1).lineToLinearHeading(TRANSFER).build();
 
-        public static final Supplier<Trajectory> SCORE1_TO_TRANSFER = () ->
-            func.apply(SCORE1).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> SCORE2_TO_TRANSFER = () ->
-                func.apply(SCORE2).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> SCORE3_TO_TRANSFER = () ->
-                func.apply(SCORE3).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> SCORE1_TO_SQUEEZE = () ->
+            func.apply(SCORE1).lineToLinearHeading(SQUEEZE).build();
+        public static final Supplier<Trajectory> SCORE2_TO_SQUEEZE = () ->
+                func.apply(SCORE2).lineToLinearHeading(SQUEEZE).build();
+        public static final Supplier<Trajectory> SCORE3_TO_SQUEEZE = () ->
+                func.apply(SCORE3).lineToLinearHeading(SQUEEZE).build();
         public static final Supplier<Trajectory> SCORE4_TO_TRANSFER = () ->
                 func.apply(SCORE4).lineToLinearHeading(TRANSFER).build();
         public static final Supplier<Trajectory> INTAKE2_TO_SCORE = () ->
@@ -124,8 +124,8 @@ public class ViggoTesting {
                 func.apply(BACKUP2).lineToLinearHeading(BACKIN2).build();
         public static final Supplier<Trajectory> BACKUP3_TO_BACKIN3 = () ->
                 func.apply(BACKUP3).lineToLinearHeading(BACKIN3).build();
-        public static final Supplier<Trajectory> BACKIN3_TO_TRANSFER = () ->
-                func.apply(BACKIN3).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> SCORE4_TO_OBSPARK = () ->
+                func.apply(SCORE4).lineToLinearHeading(OBSPARK).build();
     }
 
     public static void main(String[] args) {
@@ -165,28 +165,26 @@ public class ViggoTesting {
         return drive
             .trajectorySequenceBuilder(AutoConstants.START)
                 .addTrajectory(AutoConstants.START_TO_SCORE1.get())
-                .addTrajectory(AutoConstants.SCORE1_TO_TRANSFER.get())
-            .addTrajectory(AutoConstants.TRANSFER_TO_SQUEEZE.get())
+                .addTrajectory(AutoConstants.SCORE1_TO_SQUEEZE.get())
             .addTrajectory(AutoConstants.SQUEEZE_TO_SQUEEZEDOWN2.get())
                 .addTrajectory(AutoConstants.SQUEEZEDOWN2_TO_SQUEEZEDOWN3.get())
                 .addTrajectory(AutoConstants.SQUEEZEDOWN3_TO_OBSZONE1.get())
                 .addTrajectory(AutoConstants.OBSZONE1_TO_BACKUP.get())
                 .addTrajectory(AutoConstants.BACKUP_TO_BACKIN.get())
                 .addTrajectory(AutoConstants.BACKIN_TO_SCORE2.get())
-                .addTrajectory(AutoConstants.SCORE2_TO_TRANSFER.get())
-                .addTrajectory(AutoConstants.TRANSFER_TO_SQUEEZE.get())
+                .addTrajectory(AutoConstants.SCORE2_TO_SQUEEZE.get())
                 .addTrajectory(AutoConstants.SQUEEZE_TO_SQUEEZEDOWN32.get())
                 .addTrajectory(AutoConstants.SQUEEZEDOWN32_TO_OBSZONE2.get())
                 .addTrajectory(AutoConstants.OBSZONE2_TO_BACKUP2.get())
                 .addTrajectory(AutoConstants.BACKUP2_TO_BACKIN2.get())
                 .addTrajectory(AutoConstants.BACKIN2_TO_SCORE3.get())
-                .addTrajectory(AutoConstants.SCORE3_TO_TRANSFER.get())
-                .addTrajectory(AutoConstants.TRANSFER_TO_SQUEEZE.get())
+                .addTrajectory(AutoConstants.SCORE3_TO_SQUEEZE.get())
                 .addTrajectory(AutoConstants.SQUEEZE_TO_SQUEEZEDOWN33.get())
                 .addTrajectory(AutoConstants.SQUEEZEDOWN33_TO_OBSZONE3.get())
                 .addTrajectory(AutoConstants.OBSZONE3_TO_BACKUP3.get())
                 .addTrajectory(AutoConstants.BACKUP3_TO_BACKIN3.get())
-                .addTrajectory(AutoConstants.BQCKIN3_TO_SCORE4.get())
+                .addTrajectory(AutoConstants.BACKIN3_TO_SCORE4.get())
+                .addTrajectory(AutoConstants.SCORE4_TO_OBSPARK.get())
             .build();
     }
 }

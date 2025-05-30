@@ -198,7 +198,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     public void setSlidePos(double slidePos) {
-        slidePidController.setTargetPosition(Range.clip(slidePos, 0, 0.5));
+        slidePidController.setTargetPosition(Range.clip(slidePos, 0, 0.8));
     }
 
     public double getArmAngleRad() {

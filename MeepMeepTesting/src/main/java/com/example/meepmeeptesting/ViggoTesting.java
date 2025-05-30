@@ -34,14 +34,27 @@ public class ViggoTesting {
         public static Pose2d SQUEEZEDOWN = new Pose2d(-29.2, 43, toRadians(0));
         public static Pose2d SQUEEZEDOWN2 = new Pose2d(-36.7, 12.3, toRadians(0));
         public static Pose2d SQUEEZEDOWN3 = new Pose2d(-47.2, 12.3, toRadians(0));
+        public static Pose2d SQUEEZEDOWN32 = new Pose2d(-57.2, 12.3, toRadians(0));
+        public static Pose2d SQUEEZEDOWN33 = new Pose2d(-64.1, 12.3, toRadians(0));
+        public static Pose2d OBSPARK = new Pose2d(-54.3, 63, toRadians(0));
         public static Pose2d OBSZONE1 = new Pose2d(-47.9, 59.5, toRadians(0));
+        public static Pose2d OBSZONE2 = new Pose2d(-57.9, 59.5, toRadians(0));
+        public static Pose2d OBSZONE3 = new Pose2d(-64.1, 59.5, toRadians(0));
         public static Pose2d BACKUP = new Pose2d(-47.4, 47.9, toRadians(90));
+        public static Pose2d BACKUP2 = new Pose2d(-57.4, 47.9, toRadians(90));
+        public static Pose2d BACKUP3 = new Pose2d(-64.1, 47.9, toRadians(90));
         public static Pose2d BACKIN = new Pose2d(-47.4, 59.5, toRadians(90));
+        public static Pose2d BACKIN2 = new Pose2d(-57.4, 59.5, toRadians(90));
+        public static Pose2d BACKIN3 = new Pose2d(-64.1, 59.5, toRadians(90));
 
-
-        public static Pose2d TEST9 = new Pose2d(1, 38, toRadians(0));
         public static final Supplier<Trajectory> START_TO_TRANSFER = () ->
             func.apply(START).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> BACKIN_TO_TRANSFER = () ->
+                func.apply(BACKIN).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> BACKIN2_TO_TRANSFER = () ->
+                func.apply(BACKIN2).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> BACKIN3_TO_OBSPARK = () ->
+                func.apply(BACKIN3).lineToLinearHeading(OBSPARK).build();
         public static final Supplier<Trajectory> TRANSFER_TO_SCORE1 = () ->
             func.apply(TRANSFER).lineToLinearHeading(SCORE1).build();
         public static final Supplier<Trajectory> TRANSFER_TO_SCORE2 = () ->
@@ -81,20 +94,38 @@ public class ViggoTesting {
             func.apply(TRANSFER).lineToLinearHeading(TRAVEL).build();
         public static final Supplier<Trajectory> TRAVEL_TO_ASCENTL1 = () ->
             func.apply(TRAVEL).lineToLinearHeading(ASCENTL1).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_OBSPARK = () ->
+                func.apply(TRANSFER).lineToLinearHeading(OBSPARK).build();
         public static final Supplier<Trajectory> TRANSFER_TO_SQUEEZE = () ->
                 func.apply(TRANSFER).lineToLinearHeading(SQUEEZE).build();
-        public static final Supplier<Trajectory> SQUEEZEDOWN_TO_SQUEEZEDOWN3 = () ->
-                func.apply(SQUEEZE).lineToLinearHeading(SQUEEZEDOWN).build();
         public static final Supplier<Trajectory> SQUEEZE_TO_SQUEEZEDOWN2 = () ->
                 func.apply(SQUEEZE).lineToLinearHeading(SQUEEZEDOWN2).build();
+        public static final Supplier<Trajectory> SQUEEZE_TO_SQUEEZEDOWN32 = () ->
+                func.apply(SQUEEZE).lineToLinearHeading(SQUEEZEDOWN32).build();
+        public static final Supplier<Trajectory> SQUEEZE_TO_SQUEEZEDOWN33 = () ->
+                func.apply(SQUEEZE).lineToLinearHeading(SQUEEZEDOWN33).build();
         public static final Supplier<Trajectory> SQUEEZEDOWN3_TO_OBSZONE1 = () ->
                 func.apply(SQUEEZEDOWN3).lineToLinearHeading(OBSZONE1).build();
+        public static final Supplier<Trajectory> SQUEEZEDOWN32_TO_OBSZONE2 = () ->
+                func.apply(SQUEEZEDOWN32).lineToLinearHeading(OBSZONE2).build();
+        public static final Supplier<Trajectory> SQUEEZEDOWN33_TO_OBSZONE3 = () ->
+                func.apply(SQUEEZEDOWN33).lineToLinearHeading(OBSZONE3).build();
         public static final Supplier<Trajectory> SQUEEZEDOWN2_TO_SQUEEZEDOWN3 = () ->
                 func.apply(SQUEEZEDOWN2).lineToLinearHeading(SQUEEZEDOWN3).build();
         public static final Supplier<Trajectory> OBSZONE1_TO_BACKUP = () ->
                 func.apply(OBSZONE1).lineToLinearHeading(BACKUP).build();
+        public static final Supplier<Trajectory> OBSZONE2_TO_BACKUP2 = () ->
+                func.apply(OBSZONE2).lineToLinearHeading(BACKUP2).build();
+        public static final Supplier<Trajectory> OBSZONE3_TO_BACKUP3 = () ->
+                func.apply(OBSZONE3).lineToLinearHeading(BACKUP3).build();
         public static final Supplier<Trajectory> BACKUP_TO_BACKIN = () ->
                 func.apply(BACKUP).lineToLinearHeading(BACKIN).build();
+        public static final Supplier<Trajectory> BACKUP2_TO_BACKIN2 = () ->
+                func.apply(BACKUP2).lineToLinearHeading(BACKIN2).build();
+        public static final Supplier<Trajectory> BACKUP3_TO_BACKIN3 = () ->
+                func.apply(BACKUP3).lineToLinearHeading(BACKIN3).build();
+        public static final Supplier<Trajectory> BACKIN3_TO_TRANSFER = () ->
+                func.apply(BACKIN3).lineToLinearHeading(TRANSFER).build();
     }
 
     public static void main(String[] args) {
@@ -134,13 +165,32 @@ public class ViggoTesting {
         return drive
             .trajectorySequenceBuilder(AutoConstants.START)
             .addTrajectory(AutoConstants.START_TO_TRANSFER.get())
-
+                .addTrajectory(AutoConstants.TRANSFER_TO_SCORE1.get())
+                .addTrajectory(AutoConstants.SCORE1_TO_TRANSFER.get())
             .addTrajectory(AutoConstants.TRANSFER_TO_SQUEEZE.get())
             .addTrajectory(AutoConstants.SQUEEZE_TO_SQUEEZEDOWN2.get())
                 .addTrajectory(AutoConstants.SQUEEZEDOWN2_TO_SQUEEZEDOWN3.get())
                 .addTrajectory(AutoConstants.SQUEEZEDOWN3_TO_OBSZONE1.get())
                 .addTrajectory(AutoConstants.OBSZONE1_TO_BACKUP.get())
                 .addTrajectory(AutoConstants.BACKUP_TO_BACKIN.get())
+                .addTrajectory(AutoConstants.BACKIN_TO_TRANSFER.get())
+                .addTrajectory(AutoConstants.TRANSFER_TO_SCORE2.get())
+                .addTrajectory(AutoConstants.SCORE2_TO_TRANSFER.get())
+                .addTrajectory(AutoConstants.TRANSFER_TO_SQUEEZE.get())
+                .addTrajectory(AutoConstants.SQUEEZE_TO_SQUEEZEDOWN32.get())
+                .addTrajectory(AutoConstants.SQUEEZEDOWN32_TO_OBSZONE2.get())
+                .addTrajectory(AutoConstants.OBSZONE2_TO_BACKUP2.get())
+                .addTrajectory(AutoConstants.BACKUP2_TO_BACKIN2.get())
+                .addTrajectory(AutoConstants.BACKIN2_TO_TRANSFER.get())
+                .addTrajectory(AutoConstants.TRANSFER_TO_SCORE3.get())
+                .addTrajectory(AutoConstants.SCORE3_TO_TRANSFER.get())
+                .addTrajectory(AutoConstants.TRANSFER_TO_SQUEEZE.get())
+                .addTrajectory(AutoConstants.SQUEEZE_TO_SQUEEZEDOWN33.get())
+                .addTrajectory(AutoConstants.SQUEEZEDOWN33_TO_OBSZONE3.get())
+                .addTrajectory(AutoConstants.OBSZONE3_TO_BACKUP3.get())
+                .addTrajectory(AutoConstants.BACKUP3_TO_BACKIN3.get())
+                .addTrajectory(AutoConstants.BACKIN3_TO_TRANSFER.get())
+                .addTrajectory(AutoConstants.TRANSFER_TO_SCORE4.get())
             .build();
     }
 }

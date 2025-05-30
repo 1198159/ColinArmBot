@@ -21,13 +21,13 @@ public class ViggoTesting {
         public static Function<Pose2d, TrajectoryBuilder> func;
         public static Pose2d START = new Pose2d(-23.3, 65.3, toRadians(180));
         public static Pose2d TRANSFER = new Pose2d(-23.3, 48.2, toRadians(225));
-        public static Pose2d SCORE1 = new Pose2d(-11, 37, toRadians(90));
-        public static Pose2d SCORE2 = new Pose2d(-8, 37, toRadians(90));
-        public static Pose2d SCORE3 = new Pose2d(-5, 37, toRadians(90));
-        public static Pose2d SCORE4 = new Pose2d(-2, 37, toRadians(90));
-        public static Pose2d INTAKE1 = new Pose2d(-48, 38, toRadians(270));
-        public static Pose2d INTAKE2 = new Pose2d(-58, 38, toRadians(270));
-        public static Pose2d INTAKE3 = new Pose2d(-58, 26, toRadians(180));
+        public static Pose2d SPEC_SCORE1 = new Pose2d(-11, 37, toRadians(90));
+        public static Pose2d SPEC_SCORE2 = new Pose2d(-8, 37, toRadians(90));
+        public static Pose2d SPEC_SCORE3 = new Pose2d(-5, 37, toRadians(90));
+        public static Pose2d SPEC_SCORE4 = new Pose2d(-2, 37, toRadians(90));
+        public static Pose2d SPEC_INTAKE1 = new Pose2d(-48, 38, toRadians(270));
+        public static Pose2d SPEC_INTAKE2 = new Pose2d(-58, 38, toRadians(270));
+        public static Pose2d SPEC_INTAKE3 = new Pose2d(-58, 26, toRadians(180));
         public static Pose2d TRAVEL = new Pose2d(-40, 13, toRadians(0));
         public static Pose2d ASCENTL1 = new Pose2d(-23.6, 11, toRadians(0));
         public static Pose2d SQUEEZE = new Pose2d(-35.4, 35, toRadians(0));
@@ -47,57 +47,21 @@ public class ViggoTesting {
         public static Pose2d BACKIN2 = new Pose2d(-57.4, 59.5, toRadians(90));
         public static Pose2d BACKIN3 = new Pose2d(-64.1, 59.5, toRadians(90));
 
-        public static final Supplier<Trajectory> START_TO_TRANSFER = () ->
-            func.apply(START).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> BACKIN_TO_TRANSFER = () ->
-                func.apply(BACKIN).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> BACKIN2_TO_TRANSFER = () ->
-                func.apply(BACKIN2).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> BACKIN3_TO_OBSPARK = () ->
-                func.apply(BACKIN3).lineToLinearHeading(OBSPARK).build();
         public static final Supplier<Trajectory> START_TO_SCORE1 = () ->
-            func.apply(START).lineToLinearHeading(SCORE1).build();
+            func.apply(START).lineToLinearHeading(SPEC_SCORE1).build();
     public static final Supplier<Trajectory> BACKIN_TO_SCORE2 = () ->
-                func.apply(BACKIN).lineToLinearHeading(SCORE2).build();
+                func.apply(BACKIN).lineToLinearHeading(SPEC_SCORE2).build();
         public static final Supplier<Trajectory> BACKIN2_TO_SCORE3 = () ->
-                func.apply(BACKIN2).lineToLinearHeading(SCORE3).build();
+                func.apply(BACKIN2).lineToLinearHeading(SPEC_SCORE3).build();
         public static final Supplier<Trajectory> BACKIN3_TO_SCORE4 = () ->
-                func.apply(BACKIN3).lineToLinearHeading(SCORE4).build();
-        public static final Supplier<Trajectory> TRANSFER_TO_INTAKE1 = () ->
-                func.apply(TRANSFER).lineToLinearHeading(INTAKE1).build();
-        public static final Supplier<Trajectory> INTAKE1_TO_TRANSFER = () ->
-            func.apply(INTAKE1).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> TRANSFER_TO_INTAKE2 = () ->
-                func.apply(TRANSFER).lineToLinearHeading(INTAKE1).build();
-        public static final Supplier<Trajectory> INTAKE2_TO_TRANSFER = () ->
-                func.apply(INTAKE1).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> TRANSFER_TO_INTAKE3 = () ->
-                func.apply(TRANSFER).lineToLinearHeading(INTAKE1).build();
-        public static final Supplier<Trajectory> INTAKE3_TO_TRANSFER = () ->
-                func.apply(INTAKE1).lineToLinearHeading(TRANSFER).build();
+                func.apply(BACKIN3).lineToLinearHeading(SPEC_SCORE4).build();
 
         public static final Supplier<Trajectory> SCORE1_TO_SQUEEZE = () ->
-            func.apply(SCORE1).lineToLinearHeading(SQUEEZE).build();
+            func.apply(SPEC_SCORE1).lineToLinearHeading(SQUEEZE).build();
         public static final Supplier<Trajectory> SCORE2_TO_SQUEEZE = () ->
-                func.apply(SCORE2).lineToLinearHeading(SQUEEZE).build();
+                func.apply(SPEC_SCORE2).lineToLinearHeading(SQUEEZE).build();
         public static final Supplier<Trajectory> SCORE3_TO_SQUEEZE = () ->
-                func.apply(SCORE3).lineToLinearHeading(SQUEEZE).build();
-        public static final Supplier<Trajectory> SCORE4_TO_TRANSFER = () ->
-                func.apply(SCORE4).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> INTAKE2_TO_SCORE = () ->
-            func.apply(INTAKE2).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> SCORE_TO_INTAKE3 = () ->
-            func.apply(TRANSFER).lineToLinearHeading(INTAKE3).build();
-        public static final Supplier<Trajectory> INTAKE3_TO_SCORE = () ->
-            func.apply(INTAKE3).lineToLinearHeading(TRANSFER).build();
-        public static final Supplier<Trajectory> SCORE_TO_TRAVEL = () ->
-            func.apply(TRANSFER).lineToLinearHeading(TRAVEL).build();
-        public static final Supplier<Trajectory> TRAVEL_TO_ASCENTL1 = () ->
-            func.apply(TRAVEL).lineToLinearHeading(ASCENTL1).build();
-        public static final Supplier<Trajectory> TRANSFER_TO_OBSPARK = () ->
-                func.apply(TRANSFER).lineToLinearHeading(OBSPARK).build();
-        public static final Supplier<Trajectory> TRANSFER_TO_SQUEEZE = () ->
-                func.apply(TRANSFER).lineToLinearHeading(SQUEEZE).build();
+                func.apply(SPEC_SCORE3).lineToLinearHeading(SQUEEZE).build();
         public static final Supplier<Trajectory> SQUEEZE_TO_SQUEEZEDOWN2 = () ->
                 func.apply(SQUEEZE).lineToLinearHeading(SQUEEZEDOWN2).build();
         public static final Supplier<Trajectory> SQUEEZE_TO_SQUEEZEDOWN32 = () ->
@@ -125,7 +89,7 @@ public class ViggoTesting {
         public static final Supplier<Trajectory> BACKUP3_TO_BACKIN3 = () ->
                 func.apply(BACKUP3).lineToLinearHeading(BACKIN3).build();
         public static final Supplier<Trajectory> SCORE4_TO_OBSPARK = () ->
-                func.apply(SCORE4).lineToLinearHeading(OBSPARK).build();
+                func.apply(SPEC_SCORE4).lineToLinearHeading(OBSPARK).build();
     }
 
     public static void main(String[] args) {

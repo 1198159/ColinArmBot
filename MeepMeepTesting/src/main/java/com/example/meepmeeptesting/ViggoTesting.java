@@ -19,7 +19,7 @@ public class ViggoTesting {
     public static class AutoConstants {
 
         public static Function<Pose2d, TrajectoryBuilder> func;
-        public static Pose2d START = new Pose2d(-35, 66, toRadians(180));
+        public static Pose2d START = new Pose2d(-23.3, 65.3, toRadians(180));
         public static Pose2d TRANSFER = new Pose2d(-23.3, 48.2, toRadians(225));
         public static Pose2d SCORE1 = new Pose2d(-11, 37, toRadians(90));
         public static Pose2d SCORE2 = new Pose2d(-8, 37, toRadians(90));
@@ -30,6 +30,15 @@ public class ViggoTesting {
         public static Pose2d INTAKE3 = new Pose2d(-58, 26, toRadians(180));
         public static Pose2d TRAVEL = new Pose2d(-40, 13, toRadians(0));
         public static Pose2d ASCENTL1 = new Pose2d(-23.6, 11, toRadians(0));
+        public static Pose2d SQUEEZE = new Pose2d(-35.4, 43, toRadians(0));
+        public static Pose2d SQUEEZEDOWN = new Pose2d(-29.2, 43, toRadians(0));
+        public static Pose2d SQUEEZEDOWN2 = new Pose2d(-36.7, 12.3, toRadians(0));
+        public static Pose2d SQUEEZEDOWN3 = new Pose2d(-47.2, 12.3, toRadians(0));
+        public static Pose2d OBSZONE1 = new Pose2d(-47.9, 59.5, toRadians(0));
+        public static Pose2d BACKUP = new Pose2d(-47.4, 47.9, toRadians(90));
+        public static Pose2d BACKIN = new Pose2d(-47.4, 59.5, toRadians(90));
+
+
         public static Pose2d TEST9 = new Pose2d(1, 38, toRadians(0));
         public static final Supplier<Trajectory> START_TO_TRANSFER = () ->
             func.apply(START).lineToLinearHeading(TRANSFER).build();
@@ -45,6 +54,14 @@ public class ViggoTesting {
                 func.apply(TRANSFER).lineToLinearHeading(INTAKE1).build();
         public static final Supplier<Trajectory> INTAKE1_TO_TRANSFER = () ->
             func.apply(INTAKE1).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_INTAKE2 = () ->
+                func.apply(TRANSFER).lineToLinearHeading(INTAKE1).build();
+        public static final Supplier<Trajectory> INTAKE2_TO_TRANSFER = () ->
+                func.apply(INTAKE1).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_INTAKE3 = () ->
+                func.apply(TRANSFER).lineToLinearHeading(INTAKE1).build();
+        public static final Supplier<Trajectory> INTAKE3_TO_TRANSFER = () ->
+                func.apply(INTAKE1).lineToLinearHeading(TRANSFER).build();
 
         public static final Supplier<Trajectory> SCORE1_TO_TRANSFER = () ->
             func.apply(SCORE1).lineToLinearHeading(TRANSFER).build();
@@ -64,6 +81,20 @@ public class ViggoTesting {
             func.apply(TRANSFER).lineToLinearHeading(TRAVEL).build();
         public static final Supplier<Trajectory> TRAVEL_TO_ASCENTL1 = () ->
             func.apply(TRAVEL).lineToLinearHeading(ASCENTL1).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_SQUEEZE = () ->
+                func.apply(TRANSFER).lineToLinearHeading(SQUEEZE).build();
+        public static final Supplier<Trajectory> SQUEEZEDOWN_TO_SQUEEZEDOWN3 = () ->
+                func.apply(SQUEEZE).lineToLinearHeading(SQUEEZEDOWN).build();
+        public static final Supplier<Trajectory> SQUEEZE_TO_SQUEEZEDOWN2 = () ->
+                func.apply(SQUEEZE).lineToLinearHeading(SQUEEZEDOWN2).build();
+        public static final Supplier<Trajectory> SQUEEZEDOWN3_TO_OBSZONE1 = () ->
+                func.apply(SQUEEZEDOWN3).lineToLinearHeading(OBSZONE1).build();
+        public static final Supplier<Trajectory> SQUEEZEDOWN2_TO_SQUEEZEDOWN3 = () ->
+                func.apply(SQUEEZEDOWN2).lineToLinearHeading(SQUEEZEDOWN3).build();
+        public static final Supplier<Trajectory> OBSZONE1_TO_BACKUP = () ->
+                func.apply(OBSZONE1).lineToLinearHeading(BACKUP).build();
+        public static final Supplier<Trajectory> BACKUP_TO_BACKIN = () ->
+                func.apply(BACKUP).lineToLinearHeading(BACKIN).build();
     }
 
     public static void main(String[] args) {
@@ -103,10 +134,13 @@ public class ViggoTesting {
         return drive
             .trajectorySequenceBuilder(AutoConstants.START)
             .addTrajectory(AutoConstants.START_TO_TRANSFER.get())
-            .addTrajectory(AutoConstants.TRANSFER_TO_SCORE1.get())
-            .addTrajectory(AutoConstants.SCORE1_TO_TRANSFER.get())
-            .addTrajectory(AutoConstants.TRANSFER_TO_INTAKE1.get())
-            .addTrajectory(AutoConstants.INTAKE1_TO_TRANSFER.get())
+
+            .addTrajectory(AutoConstants.TRANSFER_TO_SQUEEZE.get())
+            .addTrajectory(AutoConstants.SQUEEZE_TO_SQUEEZEDOWN2.get())
+                .addTrajectory(AutoConstants.SQUEEZEDOWN2_TO_SQUEEZEDOWN3.get())
+                .addTrajectory(AutoConstants.SQUEEZEDOWN3_TO_OBSZONE1.get())
+                .addTrajectory(AutoConstants.OBSZONE1_TO_BACKUP.get())
+                .addTrajectory(AutoConstants.BACKUP_TO_BACKIN.get())
             .build();
     }
 }

@@ -19,31 +19,49 @@ public class ViggoTesting {
     public static class AutoConstants {
 
         public static Function<Pose2d, TrajectoryBuilder> func;
-        public static Pose2d START = new Pose2d(35, 66, toRadians(180));
-        public static Pose2d SCORE = new Pose2d(55, 55, toRadians(225));
-        public static Pose2d INTAKE1 = new Pose2d(48, 38, toRadians(270));
-        public static Pose2d INTAKE2 = new Pose2d(58, 38, toRadians(270));
-        public static Pose2d INTAKE3 = new Pose2d(58, 26, toRadians(0));
-        public static Pose2d TRAVEL = new Pose2d(40, 13, toRadians(0));
-        public static Pose2d ASCENTL1 = new Pose2d(23.6, 11, toRadians(0));
+        public static Pose2d START = new Pose2d(-35, 66, toRadians(180));
+        public static Pose2d TRANSFER = new Pose2d(-23.3, 48.2, toRadians(225));
+        public static Pose2d SCORE1 = new Pose2d(-11, 37, toRadians(90));
+        public static Pose2d SCORE2 = new Pose2d(-8, 37, toRadians(90));
+        public static Pose2d SCORE3 = new Pose2d(-5, 37, toRadians(90));
+        public static Pose2d SCORE4 = new Pose2d(-2, 37, toRadians(90));
+        public static Pose2d INTAKE1 = new Pose2d(-48, 38, toRadians(270));
+        public static Pose2d INTAKE2 = new Pose2d(-58, 38, toRadians(270));
+        public static Pose2d INTAKE3 = new Pose2d(-58, 26, toRadians(180));
+        public static Pose2d TRAVEL = new Pose2d(-40, 13, toRadians(0));
+        public static Pose2d ASCENTL1 = new Pose2d(-23.6, 11, toRadians(0));
         public static Pose2d TEST9 = new Pose2d(1, 38, toRadians(0));
-        public static final Supplier<Trajectory> START_TO_SCORE_ = () ->
-            func.apply(START).lineToLinearHeading(SCORE).build();
-        public static final Supplier<Trajectory> SCORE_TO_INTAKE1 = () ->
-            func.apply(SCORE).lineToLinearHeading(INTAKE1).build();
-        public static final Supplier<Trajectory> INTAKE1_TO_SCORE = () ->
-            func.apply(INTAKE1).lineToLinearHeading(SCORE).build();
+        public static final Supplier<Trajectory> START_TO_TRANSFER = () ->
+            func.apply(START).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_SCORE1 = () ->
+            func.apply(TRANSFER).lineToLinearHeading(SCORE1).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_SCORE2 = () ->
+                func.apply(TRANSFER).lineToLinearHeading(SCORE2).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_SCORE3 = () ->
+                func.apply(TRANSFER).lineToLinearHeading(SCORE3).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_SCORE4 = () ->
+                func.apply(TRANSFER).lineToLinearHeading(SCORE4).build();
+        public static final Supplier<Trajectory> TRANSFER_TO_INTAKE1 = () ->
+                func.apply(TRANSFER).lineToLinearHeading(INTAKE1).build();
+        public static final Supplier<Trajectory> INTAKE1_TO_TRANSFER = () ->
+            func.apply(INTAKE1).lineToLinearHeading(TRANSFER).build();
 
-        public static final Supplier<Trajectory> SCORE_TO_INTAKE2 = () ->
-            func.apply(SCORE).lineToLinearHeading(INTAKE2).build();
+        public static final Supplier<Trajectory> SCORE1_TO_TRANSFER = () ->
+            func.apply(SCORE1).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> SCORE2_TO_TRANSFER = () ->
+                func.apply(SCORE2).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> SCORE3_TO_TRANSFER = () ->
+                func.apply(SCORE3).lineToLinearHeading(TRANSFER).build();
+        public static final Supplier<Trajectory> SCORE4_TO_TRANSFER = () ->
+                func.apply(SCORE4).lineToLinearHeading(TRANSFER).build();
         public static final Supplier<Trajectory> INTAKE2_TO_SCORE = () ->
-            func.apply(INTAKE2).lineToLinearHeading(SCORE).build();
+            func.apply(INTAKE2).lineToLinearHeading(TRANSFER).build();
         public static final Supplier<Trajectory> SCORE_TO_INTAKE3 = () ->
-            func.apply(SCORE).lineToLinearHeading(INTAKE3).build();
+            func.apply(TRANSFER).lineToLinearHeading(INTAKE3).build();
         public static final Supplier<Trajectory> INTAKE3_TO_SCORE = () ->
-            func.apply(INTAKE3).lineToLinearHeading(SCORE).build();
+            func.apply(INTAKE3).lineToLinearHeading(TRANSFER).build();
         public static final Supplier<Trajectory> SCORE_TO_TRAVEL = () ->
-            func.apply(SCORE).lineToLinearHeading(TRAVEL).build();
+            func.apply(TRANSFER).lineToLinearHeading(TRAVEL).build();
         public static final Supplier<Trajectory> TRAVEL_TO_ASCENTL1 = () ->
             func.apply(TRAVEL).lineToLinearHeading(ASCENTL1).build();
     }
@@ -84,15 +102,11 @@ public class ViggoTesting {
     private static TrajectorySequence getTestTrajectory(DriveShim drive) {
         return drive
             .trajectorySequenceBuilder(AutoConstants.START)
-            .addTrajectory(AutoConstants.START_TO_SCORE_.get())
-            .addTrajectory(AutoConstants.SCORE_TO_INTAKE1.get())
-            .addTrajectory(AutoConstants.INTAKE1_TO_SCORE.get())
-            .addTrajectory(AutoConstants.SCORE_TO_INTAKE2.get())
-            .addTrajectory(AutoConstants.INTAKE2_TO_SCORE.get())
-            .addTrajectory(AutoConstants.SCORE_TO_INTAKE3.get())
-            .addTrajectory(AutoConstants.INTAKE3_TO_SCORE.get())
-            .addTrajectory(AutoConstants.SCORE_TO_TRAVEL.get())
-            .addTrajectory(AutoConstants.TRAVEL_TO_ASCENTL1.get())
+            .addTrajectory(AutoConstants.START_TO_TRANSFER.get())
+            .addTrajectory(AutoConstants.TRANSFER_TO_SCORE1.get())
+            .addTrajectory(AutoConstants.SCORE1_TO_TRANSFER.get())
+            .addTrajectory(AutoConstants.TRANSFER_TO_INTAKE1.get())
+            .addTrajectory(AutoConstants.INTAKE1_TO_TRANSFER.get())
             .build();
     }
 }

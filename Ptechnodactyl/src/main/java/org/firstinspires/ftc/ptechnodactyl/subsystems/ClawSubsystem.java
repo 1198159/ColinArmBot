@@ -20,8 +20,8 @@ public class ClawSubsystem implements Subsystem {
     @Log(name = "pivotPosition")
     public double pivotPosition = 0;
     public static double CLAW_OPEN_POSITION = 0.54;
-    public static double CLAW_ALIGN_POSITION = 0.795;
-    public static double CLAW_CLOSE_POSITION = 0.82;
+    public static double CLAW_ALIGN_POSITION = 0.82;
+    public static double CLAW_CLOSE_POSITION = 0.86;
     public static double PIVOT_NEUTRAL_POSITION = 0.5;
     public static double PIVOT_LEFT_45_POSITION = 0.33;
     public static double PIVOT_RIGHT_45_POSITION = 0.67;

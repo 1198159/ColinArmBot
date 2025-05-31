@@ -24,7 +24,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
         public static double PITCH_RAD_TO_RAD = 50.9 * (28.0 / 10);
 
         // axon bevels ratio / pulley radius
-        public static double SLIDE_RAD_TO_M = (52.0 / 18) / 0.01;
+        public static double SLIDE_RAD_TO_M = (52.0 / 18) / 0.009;
 
         public static double WRIST_UP_POSITION = 1;
         public static double WRIST_DOWN_POSITION = 0.64;
@@ -32,7 +32,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
         public static double PITCH_ARM_MIN = 0;
         public static double PITCH_ARM_MAX = Math.PI / 2;
         public static double SLIDE_M_MIN = 0;
-        public static double SLIDE_M_MAX = 2 * 0.29;
+        public static double SLIDE_M_MAX = 2 * 0.32;
 
         public static double SLIDE_MOTOR_KG = 0.5;
         public static Vector2d SLIDE_MOTOR_OFFSET = new Vector2d(0.067, 0.03);
@@ -68,15 +68,15 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
         public static Vector2d SPEC = new Vector2d(0.6, 0.6);
 
-        public static Vector2d PICKUP = new Vector2d(0.75, 0);
+        public static Vector2d PICKUP = new Vector2d(0.82, 0);
 
         public static Vector2d SCORE = new Vector2d(0, 0.98);
 
         public static Vector2d RETRACT = new Vector2d(0.4, 0);
 
-        public static PIDCoefficients pitchPID = new PIDCoefficients(1.0, 0.01, 0.05);
+        public static PIDCoefficients pitchPID = new PIDCoefficients(1.05, 0.01, 0.05);
 
-        public static PIDCoefficients slidePID = new PIDCoefficients(4.0, 0.2, 0.0);
+        public static PIDCoefficients slidePID = new PIDCoefficients(4, 0.4 , 0);
     }
 
     private final PIDFController pitchPidController, slidePidController;

@@ -10,6 +10,7 @@ import org.firstinspires.ftc.ptechnodactyl.Setup;
 import org.firstinspires.ftc.ptechnodactyl.commands.ArmCommand;
 import org.firstinspires.ftc.ptechnodactyl.commands.ClawCmds;
 import org.firstinspires.ftc.ptechnodactyl.commands.JoystickIncDecCmd;
+import org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.ptechnodactyl.subsystems.ClawSubsystem;
 
 public class OperatorController {
@@ -22,24 +23,53 @@ public class OperatorController {
     public CommandButton pivotRight45;
     public CommandButton pivot90;
     public CommandButton pivotNeutral;
-    public Stick armStick;
+    public CommandButton alignClaw;
+    public CommandButton score;
+    public CommandButton retract;
+    public CommandButton pickup;
+    public CommandButton spec;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
         gamepad = g;
         AssignNamedControllerButton();
         BindControls();
-
+        if (Setup.Connected.ARM) {
+            gamepad.ps_triangle
+                    .whenPressed(ArmCommand.score(robot.armSubsystem))
+                    .whenPressed(robot.armSubsystem::wristUp)
+                    .whenPressed(robot.clawSubsystem::pivotneutral);
+            gamepad.ps_cross
+                    .whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.RETRACT))
+                    .whenPressed(robot.armSubsystem::wristUp)
+                    .whenPressed(robot.clawSubsystem::pivotneutral);
+            gamepad.ps_circle
+                    .whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.PICKUP))
+                    .whenPressed(robot.armSubsystem::wristUp)
+                    .whenPressed(robot.clawSubsystem::pivotneutral);
+            gamepad.ps_square
+                    .whenPressed(new ArmCommand(robot.armSubsystem, ArmSubsystem.ArmConstants.SPEC))
+                    .whenPressed(robot.armSubsystem::wristUp)
+                    .whenPressed(robot.clawSubsystem::pivotneutral);
+            if (Setup.Connected.CLAW) {
+                pivotNeutral.whenPressed(robot.armSubsystem::wristDown);
+            }
+        }
     }
+
 
     private void AssignNamedControllerButton() {
         openClaw = gamepad.leftBumper;
         closeClaw = gamepad.rightBumper;
-        armStick = gamepad.rightStick;
         pivotLeft45 = gamepad.dpadLeft;
         pivotRight45 = gamepad.dpadRight;
-        pivot90 = gamepad.dpadDown;
-        pivotNeutral = gamepad.dpadUp;
+        pivot90 = gamepad.dpadUp;
+        pivotNeutral = gamepad.dpadDown;
+        alignClaw = gamepad.ps_share;
+        score = gamepad.ps_triangle;
+        retract = gamepad.ps_cross;
+        pickup = gamepad.ps_circle;
+        spec = gamepad.ps_square;
     }
 
     public void BindControls() {
@@ -55,6 +85,5 @@ public class OperatorController {
         pivotRight45.whenPressed(ClawCmds.cmds.PivotRight45(robot.clawSubsystem));
         pivotNeutral.whenPressed(ClawCmds.cmds.PivotNeutral(robot.clawSubsystem));
         pivot90.whenPressed(ClawCmds.cmds.Pivot90(robot.clawSubsystem));
-        CommandScheduler.scheduleJoystick(new JoystickIncDecCmd(robot.clawSubsystem, armStick));
     }
 }

@@ -164,12 +164,12 @@ public class ArmSubsystem implements Subsystem, Loggable {
         pitchPower = Range.clip(
             pitchPidController.update(getArmAngleRad(), getArmAngleVelRadS()),
             -0.35,
-            1
+            0.6
         );
         slidePower = Range.clip(
             slidePidController.update(getSlidePositionM(), getSlideVelMS()),
-            -1,
-            1
+            -0.9,
+            0.9
         );
 
         pitchMotor.setPower(pitchPower);
@@ -240,7 +240,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public boolean isAtTargetPosition() {
         return (
             Math.abs(pitchPidController.getLastError()) < 0.3 &&
-            Math.abs(slidePidController.getLastError()) < 0.02
+            Math.abs(slidePidController.getLastError()) < 0.05
         );
     }
 

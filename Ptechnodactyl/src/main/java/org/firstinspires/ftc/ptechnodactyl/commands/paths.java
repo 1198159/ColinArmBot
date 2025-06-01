@@ -25,7 +25,7 @@ public class paths {
                 r.clawSubsystem::pivotneutral,
                 r.clawSubsystem::closeClaw
             )
-            .andThen(new WaitCommand(0.1))
+            .andThen(new WaitCommand(0.05))
             .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
             .andThen(new WaitCommand(0.15))
             .andThen(ArmCommand.retract(r.armSubsystem), r.armSubsystem::wristDown)
@@ -45,7 +45,7 @@ public class paths {
                                 r.clawSubsystem::pivotneutral,
                                 r.clawSubsystem::closeClaw
                             )
-                            .andThen(new WaitCommand(0.1))
+                            .andThen(new WaitCommand(0.05))
                             .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
                             .andThen(new WaitCommand(0.15))
                             .andThen(ArmCommand.retract(r.armSubsystem), r.armSubsystem::wristDown)
@@ -56,7 +56,7 @@ public class paths {
                                 )
                                     .andThen(new WaitCommand(0.2))
                                     .andThen(r.clawSubsystem::closeClaw)
-                                    .andThen(new WaitCommand(0.25))
+                                    .andThen(new WaitCommand(0.2))
                                     .andThen(
                                         new TrajectorySequenceCommand(
                                             r.drivebaseSubsystem,
@@ -68,7 +68,7 @@ public class paths {
                                                 r.clawSubsystem::pivotneutral,
                                                 r.clawSubsystem::closeClaw
                                             )
-                                            .andThen(new WaitCommand(0.1))
+                                            .andThen(new WaitCommand(0.05))
                                             .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
                                             .andThen(new WaitCommand(0.15))
                                             .andThen(
@@ -81,8 +81,10 @@ public class paths {
                                                     AutoConstants.SCORE_TO_INTAKE3
                                                 )
                                                     .andThen(new WaitCommand(0.2))
+                                                    .andThen(r.clawSubsystem::pivot90)
+                                                    .andThen(new WaitCommand(0.2))
                                                     .andThen(r.clawSubsystem::closeClaw)
-                                                    .andThen(new WaitCommand(0.25))
+                                                    .andThen(new WaitCommand(0.2))
                                                     .andThen(
                                                         new TrajectorySequenceCommand(
                                                             r.drivebaseSubsystem,
@@ -94,7 +96,7 @@ public class paths {
                                                                 r.clawSubsystem::pivotneutral,
                                                                 r.clawSubsystem::closeClaw
                                                             )
-                                                            .andThen(new WaitCommand(0.1))
+                                                            .andThen(new WaitCommand(0.05))
                                                             .andThen(
                                                                 ClawCmds.cmds.OpenClaw(
                                                                     r.clawSubsystem
@@ -104,17 +106,6 @@ public class paths {
                                                             .andThen(
                                                                 ArmCommand.retract(r.armSubsystem),
                                                                 r.armSubsystem::wristDown
-                                                            )
-                                                            .andThen(
-                                                                new TrajectorySequenceCommand(
-                                                                    r.drivebaseSubsystem,
-                                                                    AutoConstants.SCORE_TO_TRAVEL
-                                                                ).andThen(
-                                                                    new TrajectorySequenceCommand(
-                                                                        r.drivebaseSubsystem,
-                                                                        AutoConstants.TRAVEL_TO_ASCENTL1
-                                                                    )
-                                                                )
                                                             )
                                                     )
                                             )

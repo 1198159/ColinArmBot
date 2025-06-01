@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class AutoConstants {
 
     public static Function<Pose2d, TrajectorySequenceBuilder> func;
-    public static Pose2d START = new Pose2d(41.75, 66, toRadians(180));
+    public static Pose2d START = new Pose2d(66, 41.75, toRadians(180));
     public static Pose2d SCORE = new Pose2d(55, 55, toRadians(225));
     public static Pose2d INTAKE1 = new Pose2d(48.75, 43.3, toRadians(270));
     public static Pose2d INTAKE2 = new Pose2d(60, 43.3, toRadians(270));

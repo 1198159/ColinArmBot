@@ -29,17 +29,17 @@ public class ArmSubsystem implements Subsystem, Loggable {
         public static double WRIST_UP_POSITION = 1;
         public static double WRIST_DOWN_POSITION = 0.64;
 
-        public static double PITCH_ARM_MIN = 0;
-        public static double PITCH_ARM_MAX = Math.PI / 2;
-        public static double SLIDE_M_MIN = 0;
-        public static double SLIDE_M_MAX = 2 * 0.29;
+        public static double PITCH_ARM_MIN = -0.05;
+        public static double PITCH_ARM_MAX = Math.PI / 1.9;
+        public static double SLIDE_M_MIN = -0.1;
+        public static double SLIDE_M_MAX = 2 * 0.36;
 
         public static double SLIDE_MOTOR_KG = 0.5;
         public static Vector2d SLIDE_MOTOR_OFFSET = new Vector2d(0.067, 0.03);
 
         public static double WRIST_ASM_KG = 0.55;
 
-        public static Vector2d WRIST_ASM_OFFSET = new Vector2d(0.5, 0);
+        public static Vector2d WRIST_ASM_OFFSET = new Vector2d(0.44, 0);
 
         public static double FORCE_GRAVITY = 9.81;
 
@@ -66,17 +66,17 @@ public class ArmSubsystem implements Subsystem, Loggable {
         public static double R = 2.4; //determined from spec sheet;
         public static double KV = 0; //determined from spec sheet
 
-        public static Vector2d SPEC = new Vector2d(0.6, 0.4);
+        public static Vector2d SPEC = new Vector2d(0.6, 0.6);
 
-        public static Vector2d PICKUP = new Vector2d(0.75, 0);
+        public static Vector2d PICKUP = new Vector2d(0.75, 0.0);
 
-        public static Vector2d SCORE = new Vector2d(0, 1.20);
+        public static Vector2d SCORE = new Vector2d(-0.1, 1.3);
 
-        public static Vector2d RETRACT = new Vector2d(0.4, 0);
+        public static Vector2d RETRACT = new Vector2d(0.4, 0.0);
 
-        public static PIDCoefficients pitchPID = new PIDCoefficients(1.0, 0.01, 0.05);
+        public static PIDCoefficients pitchPID = new PIDCoefficients(1, 0.008, 0.05);
 
-        public static PIDCoefficients slidePID = new PIDCoefficients(4.0, 0.2, 0.0);
+        public static PIDCoefficients slidePID = new PIDCoefficients(2.8, 0.2, 0.0);
     }
 
     private final PIDFController pitchPidController, slidePidController;
@@ -103,7 +103,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     @Log(name = "wristPosition")
     public double wristPosition = 0;
 
-    private double pitchOffset = 0, slideOffset = 0;
+    private double pitchOffset = 0.05, slideOffset = 0.04;
 
     public ArmSubsystem(
         EncodedMotor<DcMotorEx> pitchMotor,
@@ -142,7 +142,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
             ArmConstants.slidePID,
             0,
             0,
-            0.1,
+            0.08,
             (ticks, velocity) -> {
                 double angle = getArmAngleRad();
 
@@ -163,7 +163,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public void periodic() {
         pitchPower = Range.clip(
             pitchPidController.update(getArmAngleRad(), getArmAngleVelRadS()),
-            -0.2,
+            -0.35,
             1
         );
         slidePower = Range.clip(
@@ -198,7 +198,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     public void setSlidePos(double slidePos) {
-        slidePidController.setTargetPosition(Range.clip(slidePos, 0, 0.5));
+        slidePidController.setTargetPosition(Range.clip(slidePos, 0, 0.7));
     }
 
     public double getArmAngleRad() {

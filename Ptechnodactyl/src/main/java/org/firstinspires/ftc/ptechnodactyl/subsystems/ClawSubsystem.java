@@ -17,20 +17,24 @@ public class ClawSubsystem implements Subsystem {
 
     @Log(name = "clawPosition")
     public double clawPosition = 0;
+
     @Log(name = "pivotPosition")
     public double pivotPosition = 0;
-    public static double CLAW_OPEN_POSITION = 0.54;
+
+    public static double CLAW_OPEN_POSITION = 0.46;
     public static double CLAW_ALIGN_POSITION = 0.795;
-    public static double CLAW_CLOSE_POSITION = 0.82;
+    public static double CLAW_CLOSE_POSITION = 0.88;
     public static double PIVOT_NEUTRAL_POSITION = 0.5;
     public static double PIVOT_LEFT_45_POSITION = 0.33;
     public static double PIVOT_RIGHT_45_POSITION = 0.67;
     public static double PIVOT_90_POSITION = 0.16;
     public static double PIVOT_ALIGN = 1;
+
     private void setClawPosition(double d) {
         clawServo.setPosition(d);
         clawPosition = d;
     }
+
     private void setPivotPosition(double d) {
         pivotServo.setPosition(d);
         pivotPosition = d;
@@ -41,10 +45,10 @@ public class ClawSubsystem implements Subsystem {
         this.pivotServo = pivotServo;
     }
 
-
     public void openClaw() {
         setClawPosition(CLAW_OPEN_POSITION);
     }
+
     public void alignClaw() {
         setClawPosition(CLAW_ALIGN_POSITION);
         setPivotPosition(PIVOT_ALIGN);
@@ -53,16 +57,20 @@ public class ClawSubsystem implements Subsystem {
     public void closeClaw() {
         setClawPosition(CLAW_CLOSE_POSITION);
     }
-    public void pivotneutral(){
+
+    public void pivotneutral() {
         setPivotPosition(PIVOT_NEUTRAL_POSITION);
     }
-    public void pivotleft45(){
+
+    public void pivotleft45() {
         setPivotPosition(PIVOT_LEFT_45_POSITION);
     }
-    public void pivotright45(){
+
+    public void pivotright45() {
         setPivotPosition(PIVOT_RIGHT_45_POSITION);
     }
-    public void pivot90(){
+
+    public void pivot90() {
         setPivotPosition(PIVOT_90_POSITION);
     }
 }

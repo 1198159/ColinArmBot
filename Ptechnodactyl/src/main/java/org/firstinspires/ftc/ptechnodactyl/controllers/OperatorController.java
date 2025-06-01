@@ -29,7 +29,6 @@ public class OperatorController {
     public CommandButton retract;
     public CommandButton pickup;
     public CommandButton spec;
-    public Stick armStick;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -93,6 +92,5 @@ public class OperatorController {
         spec.whenPressed(ArmCommand.spec(robot.armSubsystem));
         retract.whenPressed(ArmCommand.retract(robot.armSubsystem));
         pickup.whenPressed(ArmCommand.pickup(robot.armSubsystem));
-        CommandScheduler.scheduleJoystick(new JoystickIncDecCmd(robot.clawSubsystem, armStick));
     }
 }

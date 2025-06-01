@@ -28,9 +28,9 @@ public class DrivebaseSubsystem
     @Config
     public abstract static class DriveConstants implements MecanumConstants {
 
-        public static double SLOW_MOTOR_SPEED = 0.6;
+        public static double SLOW_MOTOR_SPEED = 0.12;
         public static double FAST_MOTOR_SPEED = 1.0;
-        public static double AUTO_MOTOR_SPEED = 0.9;
+        public static double AUTO_MOTOR_SPEED = 0.98;
 
         @TicksPerRev
         public static final double TICKS_PER_REV = 537.7; // From GoBilda's website
@@ -111,10 +111,10 @@ public class DrivebaseSubsystem
         public static int POSE_HISTORY_LIMIT = 100;
 
         // Helps deal with tired motors
-        public static double AFR_SCALE = 0.9;
-        public static double AFL_SCALE = 0.9;
-        public static double ARR_SCALE = 0.9;
-        public static double ARL_SCALE = 0.9;
+        public static double AFR_SCALE = 0.95;
+        public static double AFL_SCALE = 0.95;
+        public static double ARR_SCALE = 0.95;
+        public static double ARL_SCALE = 0.95;
     }
 
     private static final boolean ENABLE_POSE_DIAGNOSTICS = true;
@@ -138,7 +138,7 @@ public class DrivebaseSubsystem
     public boolean Turbo = false;
 
     //    @Log(name = "Snail")
-    public boolean Snail = false;
+    public boolean Snail = true;
 
     @Log.Number(name = "cur heading")
     public double curHeading;

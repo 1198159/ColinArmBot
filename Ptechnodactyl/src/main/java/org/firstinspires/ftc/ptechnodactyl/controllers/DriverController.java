@@ -41,7 +41,6 @@ public class DriverController {
         AssignNamedControllerButton();
         if (Setup.Connected.DRIVEBASE) {
             bindDriveControls();
-            bindClawSubsystemControls();
         }
     }
 
@@ -64,17 +63,8 @@ public class DriverController {
                 drive45
             )
         );
-
         resetGyroButton.whenPressed(DrivingCommands.ResetGyro(robot.drivebaseSubsystem));
-    }
-
-    public void bindClawSubsystemControls() {
-        openClaw.whenPressed(ClawCmds.cmds.OpenClaw(robot.clawSubsystem));
-        closeClaw.whenPressed(ClawCmds.cmds.CloseClaw(robot.clawSubsystem));
-        pivotLeft45.whenPressed(ClawCmds.cmds.PivotLeft45(robot.clawSubsystem));
-        pivotRight45.whenPressed(ClawCmds.cmds.PivotRight45(robot.clawSubsystem));
-        pivotNeutral.whenPressed(ClawCmds.cmds.PivotNeutral(robot.clawSubsystem));
-        pivot90.whenPressed(ClawCmds.cmds.Pivot90(robot.clawSubsystem));
-        alignClaw.whenPressed(ClawCmds.cmds.GravityAlign(robot.clawSubsystem));
+        snailButton.whenPressed(DrivingCommands.SnailDriving(robot.drivebaseSubsystem));
+        snailButton.whenReleased(DrivingCommands.NormalDriving(robot.drivebaseSubsystem));
     }
 }

@@ -8,6 +8,7 @@ import com.technototes.library.structure.CommandOpMode;
 import org.firstinspires.ftc.ptechnodactyl.Hardware;
 import org.firstinspires.ftc.ptechnodactyl.Robot;
 import org.firstinspires.ftc.ptechnodactyl.controllers.DriverController;
+import org.firstinspires.ftc.ptechnodactyl.controllers.OperatorController;
 
 @TeleOp(name = "PlainDrive")
 @SuppressWarnings("unused")
@@ -17,6 +18,7 @@ public class PlainDrive extends CommandOpMode implements Loggable {
     public Robot robot;
 
     public DriverController driver;
+    public OperatorController operator;
 
     @Override
     public void uponInit() {
@@ -24,5 +26,6 @@ public class PlainDrive extends CommandOpMode implements Loggable {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware);
         driver = new DriverController(driverGamepad, robot);
+        operator = new OperatorController(codriverGamepad, robot);
     }
 }

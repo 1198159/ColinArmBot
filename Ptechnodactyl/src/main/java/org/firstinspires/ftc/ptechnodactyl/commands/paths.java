@@ -19,17 +19,18 @@ public class paths {
 
     public static Command SampleScoring(Robot r) {
         return new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.START_TO_SCORE_)
-            .alongWith(
-                ArmCommand.score(r.armSubsystem),
-                r.armSubsystem::wristUp,
-                r.clawSubsystem::pivotneutral,
-                r.clawSubsystem::closeClaw
-            )
-            .andThen(new WaitCommand(0.05))
+                .alongWith(r.clawSubsystem::closeClaw)
+                .andThen(new WaitCommand(0.2))
+                .andThen(ArmCommand.score(r.armSubsystem),
+                        r.armSubsystem::wristUp,
+                        r.clawSubsystem::pivotneutral,
+                        r.clawSubsystem::closeClaw)
+            .andThen(new WaitCommand(0.9))
             .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
             .andThen(new WaitCommand(0.15))
             .andThen(ArmCommand.retract(r.armSubsystem), r.armSubsystem::wristDown)
             .andThen(
+
                 new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.SCORE_TO_INTAKE1)
                     .andThen(new WaitCommand(0.2))
                     .andThen(r.clawSubsystem::closeClaw)

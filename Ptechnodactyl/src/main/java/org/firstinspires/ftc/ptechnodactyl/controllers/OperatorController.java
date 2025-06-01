@@ -29,6 +29,7 @@ public class OperatorController {
     public CommandButton retract;
     public CommandButton pickup;
     public CommandButton spec;
+    public CommandButton wristspec;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -72,6 +73,7 @@ public class OperatorController {
         spec = gamepad.ps_square;
         retract = gamepad.ps_cross;
         pickup = gamepad.ps_circle;
+        wristspec = gamepad.ps_options;
     }
 
     public void BindControls() {
@@ -92,5 +94,6 @@ public class OperatorController {
         spec.whenPressed(ArmCommand.spec(robot.armSubsystem));
         retract.whenPressed(ArmCommand.retract(robot.armSubsystem));
         pickup.whenPressed(ArmCommand.pickup(robot.armSubsystem));
+        wristspec.whenPressed((robot.armSubsystem::wristSpec));
     }
 }

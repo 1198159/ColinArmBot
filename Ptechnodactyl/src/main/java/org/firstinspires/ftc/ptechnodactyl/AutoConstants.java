@@ -14,10 +14,10 @@ import java.util.function.Supplier;
 public class AutoConstants {
 
     public static Function<Pose2d, TrajectorySequenceBuilder> func;
-    public static Pose2d START = new Pose2d(66, 41.75, toRadians(180));
+    public static Pose2d START = new Pose2d(44.75, 66, toRadians(180));
     public static Pose2d SCORE = new Pose2d(55, 55, toRadians(225));
-    public static Pose2d INTAKE1 = new Pose2d(48.75, 43.3, toRadians(270));
-    public static Pose2d INTAKE2 = new Pose2d(60, 43.3, toRadians(270));
+    public static Pose2d INTAKE1 = new Pose2d(49.25, 46, toRadians(270));
+    public static Pose2d INTAKE2 = new Pose2d(60.5, 46, toRadians(270));
     public static Pose2d INTAKE3 = new Pose2d(58, 34, toRadians(0));
     public static Pose2d TRAVEL = new Pose2d(40, 13, toRadians(0));
     public static Pose2d ASCENTL1 = new Pose2d(23.6, 11, toRadians(0));
@@ -39,7 +39,7 @@ public class AutoConstants {
             func.apply(INTAKE3).lineToLinearHeading(SCORE).build();
     public static final Supplier<TrajectorySequence> SCORE_TO_TRAVEL = () ->
             func.apply(SCORE).lineToLinearHeading(TRAVEL).build();
-    public static final Supplier<TrajectorySequence> TRAVEL_TO_ASCENTL1 = () ->
+    public static final Supplier<TrajectorySequence> TRAVEL_TO_ASCENTL1 =         () ->
             func.apply(TRAVEL).lineToLinearHeading(ASCENTL1).build();
 
 }

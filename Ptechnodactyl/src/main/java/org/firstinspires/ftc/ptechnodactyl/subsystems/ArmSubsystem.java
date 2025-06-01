@@ -28,6 +28,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
         public static double WRIST_UP_POSITION = 1;
         public static double WRIST_DOWN_POSITION = 0.64;
+        public static double WRIST_SPEC_POSITION = 0.78;
 
         public static double PITCH_ARM_MIN = -0.05;
         public static double PITCH_ARM_MAX = Math.PI / 1.9;
@@ -66,7 +67,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
         public static double R = 2.4; //determined from spec sheet;
         public static double KV = 0; //determined from spec sheet
 
-        public static Vector2d SPEC = new Vector2d(0.6, 0.6);
+        public static Vector2d SPEC = new Vector2d(0.46, 0.6);
 
         public static Vector2d PICKUP = new Vector2d(0.75, 0.0);
 
@@ -163,7 +164,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public void periodic() {
         pitchPower = Range.clip(
             pitchPidController.update(getArmAngleRad(), getArmAngleVelRadS()),
-            -0.35,
+            -0.42,
             0.6
         );
         slidePower = Range.clip(
@@ -256,4 +257,5 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public void wristDown() {
         setWristPosition(ArmConstants.WRIST_DOWN_POSITION);
     }
+    public void wristSpec(){setWristPosition(ArmConstants.WRIST_SPEC_POSITION);}
 }

@@ -25,7 +25,7 @@ public class paths {
                         r.armSubsystem::wristUp,
                         r.clawSubsystem::pivotneutral,
                         r.clawSubsystem::closeClaw)
-            .andThen(new WaitCommand(0.9))
+            .andThen(new WaitCommand(1.4))
             .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
             .andThen(new WaitCommand(0.15))
             .andThen(ArmCommand.retract(r.armSubsystem), r.armSubsystem::wristDown)
@@ -46,16 +46,16 @@ public class paths {
                                 r.clawSubsystem::pivotneutral,
                                 r.clawSubsystem::closeClaw
                             )
-                            .andThen(new WaitCommand(0.05))
+                            .andThen(new WaitCommand(1))
                             .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
-                            .andThen(new WaitCommand(0.15))
+                            .andThen(new WaitCommand(0.5))
                             .andThen(ArmCommand.retract(r.armSubsystem), r.armSubsystem::wristDown)
                             .andThen(
                                 new TrajectorySequenceCommand(
                                     r.drivebaseSubsystem,
                                     AutoConstants.SCORE_TO_INTAKE2
                                 )
-                                    .andThen(new WaitCommand(0.2))
+                                    .andThen(new WaitCommand(0.5))
                                     .andThen(r.clawSubsystem::closeClaw)
                                     .andThen(new WaitCommand(0.2))
                                     .andThen(
@@ -69,7 +69,7 @@ public class paths {
                                                 r.clawSubsystem::pivotneutral,
                                                 r.clawSubsystem::closeClaw
                                             )
-                                            .andThen(new WaitCommand(0.05))
+                                            .andThen(new WaitCommand(1 ))
                                             .andThen(ClawCmds.cmds.OpenClaw(r.clawSubsystem))
                                             .andThen(new WaitCommand(0.15))
                                             .andThen(

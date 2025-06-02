@@ -31,7 +31,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
         public static double WRIST_SPEC_POSITION = 0.78;
 
         public static double PITCH_ARM_MIN = -0.05;
-        public static double PITCH_ARM_MAX = Math.PI / 1.9;
+        public static double PITCH_ARM_MAX = Math.PI / 1.8;
         public static double SLIDE_M_MIN = -0.1;
         public static double SLIDE_M_MAX = 2 * 0.36;
 
@@ -71,7 +71,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
         public static Vector2d PICKUP = new Vector2d(0.75, 0.0);
 
-        public static Vector2d SCORE = new Vector2d(-0.1, 1.3);
+        public static Vector2d SCORE = new Vector2d(-0.2, 1.3);
 
         public static Vector2d RETRACT = new Vector2d(0.4, 0.0);
 
@@ -104,7 +104,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     @Log(name = "wristPosition")
     public double wristPosition = 0;
 
-    private double pitchOffset = 0.05, slideOffset = 0.04;
+    private double pitchOffset = 0.15, slideOffset = 0.04;
 
     public ArmSubsystem(
         EncodedMotor<DcMotorEx> pitchMotor,
@@ -241,7 +241,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public boolean isAtTargetPosition() {
         return (
             Math.abs(pitchPidController.getLastError()) < 0.3 &&
-            Math.abs(slidePidController.getLastError()) < 0.05
+            Math.abs(slidePidController.getLastError()) < 0.08
         );
     }
 

@@ -15,10 +15,10 @@ public class AutoConstants {
 
     public static Function<Pose2d, TrajectorySequenceBuilder> func;
     public static Pose2d START = new Pose2d(44.75, 66, toRadians(180));
-    public static Pose2d SCORE = new Pose2d(55, 55, toRadians(225));
-    public static Pose2d INTAKE1 = new Pose2d(49.25, 46, toRadians(270));
-    public static Pose2d INTAKE2 = new Pose2d(60.5, 46, toRadians(270));
-    public static Pose2d INTAKE3 = new Pose2d(58, 34, toRadians(0));
+    public static Pose2d SCORE = new Pose2d(55.5, 57.5, toRadians(225));
+    public static Pose2d INTAKE1 = new Pose2d(51.15, 46.4, toRadians(270));
+    public static Pose2d INTAKE2 = new Pose2d(61.3, 47, toRadians(270));
+    public static Pose2d INTAKE3 = new Pose2d(56.4, 40, toRadians(0));
     public static Pose2d TRAVEL = new Pose2d(40, 13, toRadians(0));
     public static Pose2d ASCENTL1 = new Pose2d(23.6, 11, toRadians(0));
     public static Pose2d TEST9 = new Pose2d(1, 38, toRadians(0));

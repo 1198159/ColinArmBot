@@ -14,18 +14,18 @@ import org.rowlandhall.meepmeep.roadrunner.*;
 import org.rowlandhall.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 import org.rowlandhall.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
 
-public class ViggoTesting {
+public class colindecodeautopath {
 
     public static class AutoConstants {
 
         public static Function<Pose2d, TrajectoryBuilder> func;
-        public static Pose2d START = new Pose2d(35, 66, toRadians(180));
-        public static Pose2d SCORE = new Pose2d(55, 55, toRadians(225));
-        public static Pose2d INTAKE1 = new Pose2d(48, 38, toRadians(270));
-        public static Pose2d INTAKE2 = new Pose2d(58, 38, toRadians(270));
-        public static Pose2d INTAKE3 = new Pose2d(58, 26, toRadians(0));
-        public static Pose2d TRAVEL = new Pose2d(40, 13, toRadians(0));
-        public static Pose2d ASCENTL1 = new Pose2d(23.6, 11, toRadians(0));
+        public static Pose2d START = new Pose2d(35, 66, toRadians(0));
+        public static Pose2d SCORE = new Pose2d(24, 24, toRadians(45));
+        public static Pose2d INTAKE1 = new Pose2d(26, 12, toRadians(0));
+        public static Pose2d INTAKE1.5 = new Pose2d(42, 12, toRadians(270));
+        public static Pose2d INTAKE2 = new Pose2d(26, -12, toRadians(0));
+        public static Pose2d INTAKE2 = new Pose2d(26, -12, toRadians(0));
+        static Pose2d ASCENTL1 = new Pose2d(23.6, 11, toRadians(0));
         public static Pose2d TEST9 = new Pose2d(1, 38, toRadians(0));
         public static final Supplier<Trajectory> START_TO_SCORE_ = () ->
             func.apply(START).lineToLinearHeading(SCORE).build();
